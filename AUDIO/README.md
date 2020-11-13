@@ -1,47 +1,47 @@
 # Vampire SAGA AUDIO chipset
 
-PlayPAM is a small program to test the `Vampire` (V4+) AUDIO chipset.
+AUDIO specifications
 
 # Channels
 
-Channel | Register Set
+Register Set | Description
 ------------ | -------------
-Channel 00 | DFF40_
-Channel 01 | DFF41_
-Channel 02 | DFF42_
-Channel 03 | DFF43_
-Channel 04 | DFF44_
-Channel 05 | DFF45_
-Channel 06 | DFF46_
-Channel 07 | DFF47_
+DFF40_       | Channel Number 0
+DFF41_       | Channel Number 1
+DFF42_       | Channel Number 2
+DFF43_       | Channel Number 3
+DFF44_       | Channel Number 4
+DFF45_       | Channel Number 5
+DFF46_       | Channel Number 6
+DFF47_       | Channel Number 7
 
 # Features per channel
 
-Register | RW  | Feature
----------| --- | -------
-DFF4_0 | (W) | PTR HIGH
-DFF4_2 | (W) | PTR LOW
-DFF4_4 | (W) | LEN HIGH
-DFF4_6 | (W) | LEN LOW
-DFF4_8 | (W) | VOL 8.8
-DFF4_A | (W) | MODE (Bit0=16bit, Bit1=OneShot)
-DFF4_C | (W) | PERIOD
-DFF4_E | (W) | RESERVED
+Register | Name         | Size | RW  | Description
+-------- | ------------ | ---- | --- | -----------
+DFF4_0   | AUDxPTH      | WORD | (W) | PTR HIGH
+DFF4_2   | AUDxPTL      | WORD | (W) | PTR LOW
+DFF4_4   | AUDxLENH     | WORD | (W) | LEN HIGH
+DFF4_6   | AUDxLENL     | WORD | (W) | LEN LOW
+DFF4_8   | AUDxVOLUME   | WORD | (W) | VOL 8.8
+DFF4_A   | AUDxMODE     | WORD | (W) | MODE (Bit0=16bit, Bit1=OneShot)
+DFF4_C   | AUDxPERIOD   | WORD | (W) | PERIOD
+DFF4_E   | AUDxRESERVED | WORD | (W) | RESERVED
 
 # Control registers
 
-Name | Register  | RW  | Description
----- | --------- | --- | -----------
-POTINP1  | DFF016 | (R) | Read Paula chip ID (0=Paula, 1=Pamela)
-DMACONR1 | DFF002 | (R) | Control AUD DMA  (Bit0 to Bit3 ) AUD0..3
-DMACONR2 | DFF202 | (R) | Control AUD DMA  (Bit0 to Bit11) AUD4..7
-DMACON1  | DFF096 | (W) | Control AUD DMA  (Bit0 to Bit3 ) AUD0..3
-DMACON2  | DFF296 | (W) | Control AUD DMA  (Bit0 to Bit11) AUD4..7
-INTENAR1 | DFF01C | (R) | Request INT BITS (Bit7 to Bit10) AUD0..3
-INTENAR2 | DFF21C | (R) | Request INT BITS (Bit0 to Bit11) AUD4..7
-INTENA1  | DFF09A | (W) | Request INT BITS (Bit7 to Bit10) AUD0..3
-INTENA2  | DFF29A | (W) | Request INT BITS (Bit0 to Bit11) AUD4..7
-INTREQR1 | DFF01E | (R) | Request INT BITS (Bit7 to Bit10) AUD0..3
-INTREQR2 | DFF21E | (R) | Request INT BITS (Bit0 to Bit11) AUD4..7
-INTREQ1  | DFF09C | (W) | Request INT BITS (Bit7 to Bit10) AUD0..3
-INTREQ2  | DFF29C | (W) | Request INT BITS (Bit0 to Bit11) AUD4..7
+Register  | Name     | Size | RW  | Description
+--------- | -------- | ---- | --- | -----------
+DFF016    | POTINP1  | WORD | (R) | Read Paula chip ID (0=Paula, 1=Pamela)
+DFF002    | DMACONR1 | WORD | (R) | Control AUD DMA  (Bit00 to Bit03) AUD0..3
+DFF202    | DMACONR2 | WORD | (R) | Control AUD DMA  (Bit00 to Bit11) AUD4..7
+DFF096    | DMACON1  | WORD | (W) | Control AUD DMA  (Bit00 to Bit03) AUD0..3
+DFF296    | DMACON2  | WORD | (W) | Control AUD DMA  (Bit00 to Bit11) AUD4..7
+DFF01C    | INTENAR1 | WORD | (R) | Request INT BITS (Bit07 to Bit10) AUD0..3
+DFF21C    | INTENAR2 | WORD | (R) | Request INT BITS (Bit00 to Bit11) AUD4..7
+DFF09A    | INTENA1  | WORD | (W) | Request INT BITS (Bit07 to Bit10) AUD0..3
+DFF29A    | INTENA2  | WORD | (W) | Request INT BITS (Bit00 to Bit11) AUD4..7
+DFF01E    | INTREQR1 | WORD | (R) | Request INT BITS (Bit07 to Bit10) AUD0..3
+DFF21E    | INTREQR2 | WORD | (R) | Request INT BITS (Bit00 to Bit11) AUD4..7
+DFF09C    | INTREQ1  | WORD | (W) | Request INT BITS (Bit07 to Bit10) AUD0..3
+DFF29C    | INTREQ2  | WORD | (W) | Request INT BITS (Bit00 to Bit11) AUD4..7
