@@ -1,2 +1,3 @@
 # Vampire
-Vampire Accelerators 
+
+Vampire Amiga accelerators specifications 
