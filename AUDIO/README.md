@@ -109,13 +109,13 @@ SAUD?---  | 4?E  |     | Audio channel ? reserved
 
 NAME      | ADDR | R/W | FUNCTION
 --------- | ---- | --- | --------
-DMACONR2  | 202  | R   | Control AUD DMA  read  (Bit00 to Bit07)
-DMACON2   | 296  | W   | Control AUD DMA  write (Bit00 to Bit07)
-ADKCONR2  | 010  | R   | Audio control          (Bit00 to Bit07)
-ADKCON2   | 09E  | W   | Audio control          (Bit00 to Bit07)
-INTENAR2  | 21C  | R   | Request INT BITS read  (Bit00 to Bit07)
-INTENA2   | 29A  | W   | Request INT BITS write (Bit00 to Bit07)
-INTREQR2  | 21E  | R   | Request INT BITS read  (Bit00 to Bit07)
-INTREQ2   | 29C  | W   | Request INT BITS write (Bit00 to Bit07)
+DMACONR2  | 202  | R   | DMA control (Bit00 to Bit07)
+DMACON2   | 296  | W   | DMA control (Bit00 to Bit07)
+ADKCONR2  | 010  | R   | Audio control (Bit00 to Bit07)
+ADKCON2   | 09E  | W   | Audio control (Bit00 to Bit07)
+INTENAR2  | 21C  | R   | Interrupt enable bits (Bit00 to Bit07)
+INTENA2   | 29A  | W   | Interrupt enable bits (Bit00 to Bit07)
+INTREQR2  | 21E  | R   | Interrupt request bits (Bit00 to Bit07)
+INTREQ2   | 29C  | W   | Interrupt request bits (Bit00 to Bit07)
 
 
