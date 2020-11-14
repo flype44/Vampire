@@ -30,7 +30,7 @@ PAULA offers 4 AUDIO channels, all 8-bits.
 The wavedata location must be in Chip RAM.
 
 
-** AUDIO legacy channels **
+**AUDIO legacy channels**
 
 NAME      | ADDR | R/W | FUNCTION
 --------- | ---- | --- | --------
@@ -39,7 +39,7 @@ AUD1      | 0B?  | W   | Channel Number 1
 AUD2      | 0C?  | W   | Channel Number 2
 AUD3      | 0D?  | W   | Channel Number 3
 
-** AUDIO legacy functions per channel **
+**AUDIO legacy functions per channel**
 
 NAME      | ADDR | R/W | FUNCTION
 --------- | ---- | --- | --------
@@ -52,7 +52,7 @@ AUD?DAT   | 0?A  | W   | Audio channel ? data
 AUD?---   | 0?C  |     | Audio channel ? reserved
 AUD?---   | 0?E  |     | Audio channel ? reserved
 
-** AUDIO legacy control registers **
+**AUDIO legacy control registers**
 
 NAME      | ADDR | R/W | FUNCTION
 --------- | ---- | --- | --------
@@ -75,7 +75,7 @@ The first 4 channels (AUD0 to AUD3) are accessibles either from the legacy audio
 The new additional channels (AUD4 to AUD7) must be accessed from the new audio register set (from DFF44x to DFF47x).
 
 
-** AUDIO extended channels **
+**AUDIO extended channels**
 
 NAME      | ADDR | R/W | FUNCTION
 --------- | ---- | --- | --------
@@ -88,7 +88,7 @@ SAUD5     | 45?  | W   | Channel Number 5
 SAUD6     | 46?  | W   | Channel Number 6
 SAUD7     | 47?  | W   | Channel Number 7
 
-** AUDIO extended functions per channel **
+**AUDIO extended functions per channel**
 
 NAME      | ADDR | R/W | FUNCTION
 --------- | ---- | --- | --------
@@ -101,7 +101,7 @@ SAUD?CTL  | 4?A  | W   | Audio channel ? control (Bit0:16bit, Bit1:OneShot, Bit2
 SAUD?PER  | 4?C  | W   | Audio channel ? period (16bits)
 SAUD?---  | 4?E  |     | Audio channel ? reserved
 
-** AUDIO extended control registers **
+**AUDIO extended control registers**
 
 NAME      | ADDR | R/W | FUNCTION
 --------- | ---- | --- | --------
