@@ -7,29 +7,40 @@
 
 **AUDIO specifications**
 
-The SAGA chipset embeds the legacy PAULA 4-channels audio chip.
+* The `SAGA` chipset embeds the legacy `PAULA` 4-channels audio chip.
 
-And it extends it to 8-channels, including new features.
+* And extends it to a 8-channels audio chip, including new features.
 
 
 # PAULA identifier register
 
-Use this register to detect the PAULA version.
-Bit01 to Bit07 contains the Chip ID code.
+Use this register to detect the `PAULA` version.
+POTINP Bit01 to Bit07 contains the Chip ID code.
 
 NAME      | ADDR | R/W | FUNCTION
 --------- | ---- | --- | --------
-POTINP1   | 016  | R   | Paula chip ID (0=Paula, 1=SAGA)
+POTINP    | 016  | R   | Paula chip ID (0=Paula, 1=Extended)
 
 ```
 UWORD ChipID = ( ( ( *( volatile UWORD* ) 0xDFF016 ) & 0xFE ) >> 1 );
+
+if(ChipID == 0)
+{
+    // Legacy
+    printf("Audio CHIP: Legacy Paula\n");
+}
+else
+{
+    // Extended
+    printf("Audio CHIP: Extended Paula\n");
+}
 ```
 
 # PAULA legacy registers (AUD0 to AUD3)
 
-* PAULA offers 4 AUDIO channels, all 8-bits.
+* `PAULA` offers 4 AUDIO channels, all 8-bits PCM.
 
-* The wavedata location must be in Chip RAM.
+* The wavedata location must be in `Chip RAM`.
 
 
 **AUDIO legacy channels**
@@ -40,6 +51,7 @@ AUD0      | 0A?  | W   | Channel Number 0
 AUD1      | 0B?  | W   | Channel Number 1
 AUD2      | 0C?  | W   | Channel Number 2
 AUD3      | 0D?  | W   | Channel Number 3
+
 
 **AUDIO legacy functions per channel**
 
@@ -53,6 +65,7 @@ AUD?VOL   | 0?8  | W   | Audio channel ? volume
 AUD?DAT   | 0?A  | W   | Audio channel ? data
 AUD?      | 0?C  |     | Audio channel ? reserved
 AUD?      | 0?E  |     | Audio channel ? reserved
+
 
 **AUDIO legacy control registers**
 
@@ -70,9 +83,9 @@ INTREQ    | 09C  | W   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD
 
 # PAULA extended registers (AUD4 to AUD7)
 
-* SAGA offers 8 AUDIO channels, all 8-bits or 16-bits.
+* `SAGA` offers 8 AUDIO channels, all 8-bits or 16-bits PCM.
 
-* The wavedata location can be in Chip RAM or in Fast RAM.
+* The wavedata location can be in `Chip RAM` or in `Fast RAM`.
 
 * The first 4 channels (AUD0 to AUD3) are accessibles either from the legacy audio register set (from DFF0Ax to DFF0Dx), or from the new audio register set (from DFF40x to DFF43x).
 
@@ -92,6 +105,7 @@ SAUD5     | 45?  | W   | Channel Number 5
 SAUD6     | 46?  | W   | Channel Number 6
 SAUD7     | 47?  | W   | Channel Number 7
 
+
 **AUDIO extended functions per channel**
 
 NAME      | ADDR | R/W | FUNCTION
@@ -105,14 +119,15 @@ SAUD?CTL  | 4?A  | W   | Audio channel ? control (Bit0:16bit, Bit1:OneShot, Bit2
 SAUD?PER  | 4?C  | W   | Audio channel ? period (16bits)
 SAUD?     | 4?E  |     | Audio channel ? reserved
 
+
 **AUDIO extended control registers**
 
 NAME      | ADDR | R/W | FUNCTION
 --------- | ---- | --- | --------
 DMACONR2  | 202  | R   | DMA control (Bit00 to Bit03, for AUD4 to AUD7)
 DMACON2   | 296  | W   | DMA control (Bit00 to Bit03, for AUD4 to AUD7)
-ADKCONR2  | 010  | R   | Audio control (Bit00 to Bit07, for AUD4 to AUD7) -- UNUSED for NOW
-ADKCON2   | 09E  | W   | Audio control (Bit00 to Bit07, for AUD4 to AUD7) -- UNUSED for NOW
+ADKCONR2  | 010  | R   | Audio control (Bit00 to Bit07, for AUD4 to AUD7) _UNUSED for NOW_
+ADKCON2   | 09E  | W   | Audio control (Bit00 to Bit07, for AUD4 to AUD7) _UNUSED for NOW_
 INTENAR2  | 21C  | R   | Interrupt enable bits (Bit00 to Bit03, for AUD4 to AUD7)
 INTENA2   | 29A  | W   | Interrupt enable bits (Bit00 to Bit03, for AUD4 to AUD7)
 INTREQR2  | 21E  | R   | Interrupt request bits (Bit00 to Bit03, for AUD4 to AUD7)
