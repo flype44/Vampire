@@ -121,6 +121,6 @@ INTREQ2   | 29C  | W   | Interrupt request bits (Bit00 to Bit03, for AUD4 to AUD
 
 # PAULA interrupt vectors (AUD0 to AUD7)
 
-![Vampire Logo](VectorTable.png)
+![Vector Table](VectorTable.png)
 
 
