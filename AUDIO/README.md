@@ -119,3 +119,8 @@ INTREQR2  | 21E  | R   | Interrupt request bits (Bit00 to Bit03, for AUD4 to AUD
 INTREQ2   | 29C  | W   | Interrupt request bits (Bit00 to Bit03, for AUD4 to AUD7)
 
 
+# PAULA interrupt vectors (AUD0 to AUD7)
+
+![Vector Table](VectorTable.png)
+
+
