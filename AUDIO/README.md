@@ -51,21 +51,21 @@ AUD?LEN   | 0?4  | W   | Audio channel ? length
 AUD?PER   | 0?6  | W   | Audio channel ? period
 AUD?VOL   | 0?8  | W   | Audio channel ? volume
 AUD?DAT   | 0?A  | W   | Audio channel ? data
-AUD?---   | 0?C  |     | Audio channel ? reserved
-AUD?---   | 0?E  |     | Audio channel ? reserved
+AUD?      | 0?C  |     | Audio channel ? reserved
+AUD?      | 0?E  |     | Audio channel ? reserved
 
 **AUDIO legacy control registers**
 
 NAME      | ADDR | R/W | FUNCTION
 --------- | ---- | --- | --------
-DMACONR   | 002  | R   | DMA control            (Bit00 to Bit03)
-DMACON    | 096  | W   | DMA control            (Bit00 to Bit03)
-ADKCONR   | 010  | R   | Audio control          (Bit00 to Bit07)
-ADKCON    | 09E  | W   | Audio control          (Bit00 to Bit07)
-INTENAR   | 01C  | R   | Interrupt enable bits  (Bit07 to Bit10)
-INTENA    | 09A  | W   | Interrupt enable bits  (Bit07 to Bit10)
-INTREQR   | 01E  | R   | Interrupt request bits (Bit07 to Bit10)
-INTREQ    | 09C  | W   | Interrupt request bits (Bit07 to Bit10)
+DMACONR   | 002  | R   | DMA control            (Bit00 to Bit03, for AUD0 to AUD3)
+DMACON    | 096  | W   | DMA control            (Bit00 to Bit03, for AUD0 to AUD3)
+ADKCONR   | 010  | R   | Audio control          (Bit00 to Bit07, for AUD0 to AUD3)
+ADKCON    | 09E  | W   | Audio control          (Bit00 to Bit07, for AUD0 to AUD3)
+INTENAR   | 01C  | R   | Interrupt enable bits  (Bit07 to Bit10, for AUD0 to AUD3)
+INTENA    | 09A  | W   | Interrupt enable bits  (Bit07 to Bit10, for AUD0 to AUD3)
+INTREQR   | 01E  | R   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD3)
+INTREQ    | 09C  | W   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD3)
 
 
 # PAULA extended registers (AUD4 to AUD7)
@@ -103,19 +103,19 @@ SAUD?LENL | 4?6  | W   | Audio channel ? length (low 15 bits)
 SAUD?VOL  | 4?8  | W   | Audio channel ? volume (8.8) (L/R)
 SAUD?CTL  | 4?A  | W   | Audio channel ? control (Bit0:16bit, Bit1:OneShot, Bit2:Stereo)
 SAUD?PER  | 4?C  | W   | Audio channel ? period (16bits)
-SAUD?---  | 4?E  |     | Audio channel ? reserved
+SAUD?     | 4?E  |     | Audio channel ? reserved
 
 **AUDIO extended control registers**
 
 NAME      | ADDR | R/W | FUNCTION
 --------- | ---- | --- | --------
-DMACONR2  | 202  | R   | DMA control (Bit00 to Bit07)
-DMACON2   | 296  | W   | DMA control (Bit00 to Bit07)
-ADKCONR2  | 010  | R   | Audio control (Bit00 to Bit07)
-ADKCON2   | 09E  | W   | Audio control (Bit00 to Bit07)
-INTENAR2  | 21C  | R   | Interrupt enable bits (Bit00 to Bit07)
-INTENA2   | 29A  | W   | Interrupt enable bits (Bit00 to Bit07)
-INTREQR2  | 21E  | R   | Interrupt request bits (Bit00 to Bit07)
-INTREQ2   | 29C  | W   | Interrupt request bits (Bit00 to Bit07)
+DMACONR2  | 202  | R   | DMA control (Bit00 to Bit03, for AUD4 to AUD7)
+DMACON2   | 296  | W   | DMA control (Bit00 to Bit03, for AUD4 to AUD7)
+ADKCONR2  | 010  | R   | Audio control (Bit00 to Bit07, for AUD4 to AUD7) -- UNUSED for NOW
+ADKCON2   | 09E  | W   | Audio control (Bit00 to Bit07, for AUD4 to AUD7) -- UNUSED for NOW
+INTENAR2  | 21C  | R   | Interrupt enable bits (Bit00 to Bit03, for AUD4 to AUD7)
+INTENA2   | 29A  | W   | Interrupt enable bits (Bit00 to Bit03, for AUD4 to AUD7)
+INTREQR2  | 21E  | R   | Interrupt request bits (Bit00 to Bit03, for AUD4 to AUD7)
+INTREQ2   | 29C  | W   | Interrupt request bits (Bit00 to Bit03, for AUD4 to AUD7)
 
 
