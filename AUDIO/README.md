@@ -5,7 +5,7 @@
 ![Vampire Logo](V_LOGO.png)
 
 
-AUDIO specifications
+**AUDIO specifications**
 
 The SAGA chipset embeds the legacy PAULA 4-channels audio chip.
 
@@ -27,9 +27,9 @@ UWORD ChipID = ( ( ( *( volatile UWORD* ) 0xDFF016 ) & 0xFE ) >> 1 );
 
 # PAULA legacy registers (AUD0 to AUD3)
 
-PAULA offers 4 AUDIO channels, all 8-bits.
+* PAULA offers 4 AUDIO channels, all 8-bits.
 
-The wavedata location must be in Chip RAM.
+* The wavedata location must be in Chip RAM.
 
 
 **AUDIO legacy channels**
@@ -70,13 +70,13 @@ INTREQ    | 09C  | W   | Interrupt request bits (Bit07 to Bit10)
 
 # PAULA extended registers (AUD4 to AUD7)
 
-SAGA offers 8 AUDIO channels, all 8-bits or 16-bits.
+* SAGA offers 8 AUDIO channels, all 8-bits or 16-bits.
 
-The wavedata location can be in Chip RAM or in Fast RAM.
+* The wavedata location can be in Chip RAM or in Fast RAM.
 
-The first 4 channels (AUD0 to AUD3) are accessibles either from the legacy audio register set (from DFF0Ax to DFF0Dx), or from the new audio register set (from DFF40x to DFF43x).
+* The first 4 channels (AUD0 to AUD3) are accessibles either from the legacy audio register set (from DFF0Ax to DFF0Dx), or from the new audio register set (from DFF40x to DFF43x).
 
-The new additional channels (AUD4 to AUD7) must be accessed from the new audio register set (from DFF44x to DFF47x).
+* The new additional channels (AUD4 to AUD7) must be accessed from the new audio register set (from DFF44x to DFF47x).
 
 
 **AUDIO extended channels**
