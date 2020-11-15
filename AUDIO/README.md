@@ -26,7 +26,7 @@ It is intended to the developers who plans to use the `Vampire` audio chip for t
 The `SAGA` chipset embeds the legacy `PAULA` 4-channels audio chip. It extends `PAULA` to a 8-channels audio chip, including new features. It is only available on the `Vampire` _standalone_ cards, in opposite to the `Vampire` _accelerators_ cards.
 
 
-# Vampire CORE Releases
+# Vampire core releases
 
 
 Latest `Vampire` cores are officially distributed from [here](https://www.apollo-accelerators.com/wiki/doku.php/start#core_and_software_updates). 
@@ -84,7 +84,7 @@ AUD3      | 0D?  |  W  | Channel Number 3
 **AUDIO legacy functions per channel**
 
 
-* Location of waveform data, must be in `Chip RAM`.
+* Location of waveform data, must be located in `Chip RAM`.
 
 * Length of waveform, in words (min=0, max=0xFFFF) (eg. 128KB).
 
@@ -104,11 +104,10 @@ AUD?DAT   | 0?A  |  W  | Audio channel ? data
 AUD?      | 0?C  |     | Audio channel ? reserved
 AUD?      | 0?E  |     | Audio channel ? reserved
 
+
 [custom.h](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_2._guide/node00CD.html)
 
 ```
-/* harware/custom.h */
-
 struct AudChannel {
     UWORD *ac_ptr;    /* pointer to start of waveform data */
     UWORD  ac_len;    /* length of waveform in words */
@@ -118,7 +117,6 @@ struct AudChannel {
     UWORD  ac_pad[2]; /* unused */
 } aud[4];
 ```
-[dmabits.h](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_2._guide/node00C8.html)
 
 
 **AUDIO legacy control registers**
@@ -130,7 +128,7 @@ struct AudChannel {
 
 * INTENA bits [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0036.html)
 
-* INTREQ bits [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0036.html)
+* INTREQ bits [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0037.html)
 
 
 NAME      | ADDR | R/W | FUNCTION
@@ -145,11 +143,34 @@ INTREQR   | 01E  | R   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD
 INTREQ    | 09C  | W   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD3)
 
 
+[adkbits.h](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_2._guide/node00C6.html)
+
+```
+#define ADKB_SETCLR  (15)             
+#define ADKB_USE3PN  (7)              
+#define ADKB_USE2P3  (6)              
+#define ADKB_USE1P2  (5)              
+#define ADKB_USE0P1  (4)              
+#define ADKB_USE3VN  (3)              
+#define ADKB_USE2V3  (2)              
+#define ADKB_USE1V2  (1)              
+#define ADKB_USE0V1  (0)              
+
+#define ADKF_SETCLR  (1L<<ADKB_SETCLR)   /* Standard set/clear bit */
+#define ADKF_USE3PN  (1L<<ADKB_USE3PN)   /* Use aud chan 3 to modulate period of ?? */
+#define ADKF_USE2P3  (1L<<ADKB_USE2P3)   /* Use aud chan 2 to modulate period of 3  */
+#define ADKF_USE1P2  (1L<<ADKB_USE1P2)   /* Use aud chan 1 to modulate period of 2  */
+#define ADKF_USE0P1  (1L<<ADKB_USE0P1)   /* Use aud chan 0 to modulate period of 1  */
+#define ADKF_USE3VN  (1L<<ADKB_USE3VN)   /* Use aud chan 3 to modulate volume of ?? */
+#define ADKF_USE2V3  (1L<<ADKB_USE2V3)   /* Use aud chan 2 to modulate volume of 3  */
+#define ADKF_USE1V2  (1L<<ADKB_USE1V2)   /* Use aud chan 1 to modulate volume of 2  */
+#define ADKF_USE0V1  (1L<<ADKB_USE0V1)   /* Use aud chan 0 to modulate volume of 1  */
+```
+
+
 [dmabits.h](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_2._guide/node00C8.html)
 
 ```
-/* hardware/dmabits.h */
-
 #define DMAB_SETCLR  (15)
 #define DMAB_AUD3    (3)
 #define DMAB_AUD2    (2)
@@ -168,8 +189,6 @@ INTREQ    | 09C  | W   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD
 [intbits.h](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_2._guide/node00CE.html)
 
 ```
-/* hardware/intbits.h */
-
 #define INTB_SETCLR  (15)
 #define INTB_AUD3    (10)
 #define INTB_AUD2    (9)
@@ -395,7 +414,8 @@ void example(void)
 * Refers to [saga_audio.h](saga_audio.h) for useful macros and constants to include in your programs.
 
 
-# Frequentely Asked Question
+# Frequently Asked Question
+
 
 > Is it or will it be available on the `Vampire` (V2) accelerators ?
 
