@@ -38,12 +38,12 @@ Refers to [PlaySnd.c](PlaySnd.c) for a very simple C-lang example.
 Refers to [saga_audio.h](saga_audio.h) for useful macros and constants to include in your programs.
 
 
-# Releases
+# Vampire CORE Releases
 
 
 Latest `Vampire` cores are officially distributed from [here](https://www.apollo-accelerators.com/wiki/doku.php/start#core_and_software_updates). 
 
-Additionally, Beta cores are regularly distributed, for testing purposes, in the official `ApolloTeam` Discord Channel [here](https://discord.gg/bM684VW).
+Additionally, Beta cores are regularly distributed in the official `ApolloTeam` Discord Channel [here](https://discord.gg/bM684VW).
 
 
 # PAULA identifier register
@@ -100,9 +100,9 @@ AUD3      | 0D?  |  W  | Channel Number 3
 
 * Length of waveform, in words (min=0, max=0xFFFF) (eg. 128KB).
 
-* Volume (min=0, max=64).
-
 * Period (min=0, max=0xFFFF). Example: 3546895 / 22050.
+
+* Volume (min=0, max=64).
 
 
 NAME      | ADDR | R/W | FUNCTION
@@ -199,7 +199,7 @@ Below are the `SAGA` extended `PAULA` specifications.
 **AUDIO extended channels**
 
 
-* `SAGA` offers 8 audio channels, all 8-bits or 16-bits PCM.
+* `SAGA` offers 8 audio channels, all 8-bits or 16-bits BigEndian PCM.
 
 * The first 4 channels (AUD0 to AUD3) are accessibles either from the legacy audio register set (from DFF0Ax to DFF0Dx), 
 
