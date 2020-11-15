@@ -52,13 +52,13 @@
 /* new defines for SAUDx */
 
 struct SAudChannel {
-    ULONG *ac_ptr;    /* location */
-    ULONG  ac_len;    /* length   */
-    UWORD  ac_vol;    /* volume   */
-    UWORD  ac_ctl;    /* control  */
-    UWORD  ac_per;    /* period   */
-    UWORD  ac_pad;    /* unused   */
-} aud[ MAX_CHANNELS ];
+    ULONG *sac_ptr;    /* location */
+    ULONG  sac_len;    /* length   */
+    UWORD  sac_vol;    /* volume   */
+    UWORD  sac_ctl;    /* control  */
+    UWORD  sac_per;    /* period   */
+    UWORD  sac_pad;    /* unused   */
+} saud[ MAX_CHANNELS ];
 
 #define SAUD_REGBASE(CH)     (CUSTOM_REGBASE + 0x400 + (((CH) & 0x0F) << 4))
 #define SAUD_REG(CH, IDX)    (SAUD_REGBASE(CH) + (IDX))
@@ -135,10 +135,14 @@ struct SAudChannel {
 
 /* new defines for SAUDxCTL */
 
-#define SAUDCTLB_STEREO      (2)
-#define SAUDCTLB_ONESHOT     (1)
-#define SAUDCTLB_16BITS      (0)
+#define SAUDCTLB_ENDIANNESS  (4) /* 0=BigEndian,  1=LittleEndian [UNIMPLEMENTED] */
+#define SAUDCTLB_INTERLEAVED (3) /* 0=Contiguous, 1=Interleaved  [UNIMPLEMENTED] */
+#define SAUDCTLB_STEREO      (2) /* 0=Mono,       1=Stereo       [IMPLEMENTED]   */
+#define SAUDCTLB_ONESHOT     (1) /* 0=Continuous, 1=OneShot      [IMPLEMENTED]   */
+#define SAUDCTLB_16BITS      (0) /* 0=8-bits,     1=16-bits      [IMPLEMENTED]   */
 
+#define SAUDCTLF_ENDIANNESS  (1L<<SAUDCTLB_ENDIANNESS)
+#define SAUDCTLF_INTERLEAVED (1L<<SAUDCTLB_INTERLEAVED)
 #define SAUDCTLF_STEREO      (1L<<SAUDCTLB_STEREO)
 #define SAUDCTLF_ONESHOT     (1L<<SAUDCTLB_ONESHOT)
 #define SAUDCTLF_16BITS      (1L<<SAUDCTLB_16BITS)

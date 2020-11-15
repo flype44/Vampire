@@ -51,7 +51,7 @@ Additionally, Beta cores are regularly distributed in the official `ApolloTeam` 
 
 * Use this register to detect the `PAULA` version.
 
-* POTINP Bit01 to Bit07 contains the Chip ID code.
+* POTINP Bit01 to Bit07 contains the Chip ID code [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node018B.html).
 
 * If non-zero then the `SAGA` extended `PAULA` audio chip is available.
 
@@ -116,6 +116,7 @@ AUD?DAT   | 0?A  |  W  | Audio channel ? data
 AUD?      | 0?C  |     | Audio channel ? reserved
 AUD?      | 0?E  |     | Audio channel ? reserved
 
+[custom.h](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_2._guide/node00CD.html)
 
 ```
 /* harware/custom.h */
@@ -129,18 +130,19 @@ struct AudChannel {
     UWORD  ac_pad[2]; /* unused */
 } aud[4];
 ```
+[dmabits.h](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_2._guide/node00C8.html)
 
 
 **AUDIO legacy control registers**
 
 
-* ADKCON bits
+* ADKCON bits [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0012.html)
 
-* DMACON bits
+* DMACON bits [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node002F.html)
 
-* INTENA bits
+* INTENA bits [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0036.html)
 
-* INTREQ bits
+* INTREQ bits [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0036.html)
 
 
 NAME      | ADDR | R/W | FUNCTION
@@ -154,6 +156,8 @@ INTENA    | 09A  | W   | Interrupt enable bits  (Bit07 to Bit10, for AUD0 to AUD
 INTREQR   | 01E  | R   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD3)
 INTREQ    | 09C  | W   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD3)
 
+
+[dmabits.h](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_2._guide/node00C8.html)
 
 ```
 /* hardware/dmabits.h */
@@ -172,6 +176,8 @@ INTREQ    | 09C  | W   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD
 #define DMAF_AUDIO   (0x000F)            /* Enable DMA for ALL Audio channels */
 ```
 
+
+[intbits.h](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_2._guide/node00CE.html)
 
 ```
 /* hardware/intbits.h */
@@ -260,6 +266,16 @@ SAUD?CTL  | 4?A  |  W  | Audio channel ? control bits
 SAUD?PER  | 4?C  |  W  | Audio channel ? period
 SAUD?     | 4?E  |     | Audio channel ? reserved
 
+```
+struct SAudChannel {
+    ULONG *sac_ptr;    /* location */
+    ULONG  sac_len;    /* length   */
+    UWORD  sac_vol;    /* volume   */
+    UWORD  sac_ctl;    /* control  */
+    UWORD  sac_per;    /* period   */
+    UWORD  sac_pad;    /* unused   */
+} saud[ MAX_CHANNELS ];
+```
 
 ```
 /* Example using macros */
@@ -377,10 +393,39 @@ void example(void)
 # PAULA interrupt vectors (AUD0 to AUD7)
 
 
-* AMIGA interrupts auto-vectors table.
+* AMIGA interrupts auto-vectors table [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node016F.html)
 
 
 ![Vector Table](VectorTable.png)
 
 
 
+# Frequentely Asked Question
+
+> Is it or will it be available on the `Vampire` (V2) accelerators ?
+
+For now it is only available on the `Vampire` (V4) standalone board.
+
+It is eventually planned for the V2 boards within the `GOLD3` core.
+
+Main difficulties are : Time and Available space in the V2 FPGA.
+
+There is no date announced, it all depends on the time the APOLLO-Team may spend on this project.
+
+> Are there software that already use the new audio chip ?
+
+There was a EaglePlayer plugin, but it is deprecated since some refactoring on the audio chip.
+
+There is the Amiga MilkyTracker port, by Neoman (year 2020), which fully implement the 8-channels, and 16-bits modes.
+
+There are plans for a AHI driver (any help would be appreciated).
+
+There are plans for a audio.device (any help would be appreciated).
+
+> It was announced 16 channels, the documentation mentions 8 channels, why ?
+
+Specifications were reconsidered due to 2 main reasons.
+
+First, implementing 16 channels on the current FPGA appears to be more greedy than reasonible.
+
+Second, the AC68080 is very powerful enough to use software audio mixing (maybe only 5-10% of cpu, if well done).
