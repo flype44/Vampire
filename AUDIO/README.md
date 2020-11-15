@@ -2,8 +2,6 @@
 
 > (C) Copyright 2016-2020 APOLLO-Team
 
-Written and maintained by `flype`, with the great help from the `APOLLO-Team` members.
-
 This article describes all the `SAGA` audio features, and is still in **Work In Progress** status.
 
 ![Vampire Logo](V_LOGO.png)
@@ -16,7 +14,7 @@ Permissions of this weak copyleft license are conditioned on making available so
 
 # Documentation
 
-It is intended to the developers who plans to use the `Vampire` audio chip for their programs or games, and to help the community to write drivers. All the specifications mentionned in this documentation always refers to the latest version. Take care to use latest `Vampire` core version in your programs (see below).
+Written and maintained by `flype`, with the great help from the `APOLLO-Team` members. It is intended to the developers who plans to use the `Vampire` audio chip for their programs or games, and to help the community to write drivers. All the specifications mentionned in this documentation always refers to the latest version. Take care to use latest `Vampire` core version in your programs (see below).
 
 # Core releases
 
