@@ -1,9 +1,23 @@
 # Vampire SAGA AUDIO chipset
 
+
 > (C) Copyright 2016-2020 APOLLO-Team
+
+Written and maintained by `flype`, APOLLO-Team member.
+
+The purpose of this article is to bring valuable information and control over the `Vampire` boards.
 
 ![Vampire Logo](V_LOGO.png)
 
+
+# Documentation
+
+
+This article describes all the `SAGA` audio features, and is still in Work In Progress status.
+
+It always refers to the latest version. Take care to use latest `Vampire` CORE version in your programs.
+
+This documentation is written by the `flype`, with the great help from the `APOLLO-Team` members.
 
 The `SAGA` chipset embeds the legacy `PAULA` 4-channels audio chip.
 
@@ -11,9 +25,9 @@ The chipset extends `PAULA` to a 8-channels audio chip, including new features.
 
 This is only available on the Vampire _standalone_ cards, in opposite to the Vampire _accelerators_ cards.
 
-Refers to ![saga_audio.h] for useful macros and constants to include in your programs.
+Refers to [saga_audio.h](saga_audio.h) for useful macros and constants to include in your programs.
 
-Refers to ![PlaySnd.c] for a very simple C-lang example.
+Refers to [PlaySnd.c](PlaySnd.c) for a very simple C-lang example.
 
 
 # PAULA identifier register
