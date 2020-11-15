@@ -4,7 +4,7 @@
 
 This article describes all the `SAGA` audio features, and is still in **Work In Progress** status.
 
-![Vampire Logo](V_LOGO.png)
+![Vampire Logo](../ASSETS/V_LOGO.png)
 
 # License
 
