@@ -5,11 +5,9 @@
 ![Vampire Logo](V_LOGO.png)
 
 
-**AUDIO specifications**
+The `SAGA` chipset embeds the legacy `PAULA` 4-channels audio chip.
 
-* The `SAGA` chipset embeds the legacy `PAULA` 4-channels audio chip.
-
-* And extends it to a 8-channels audio chip, including new features.
+And extends it to a 8-channels audio chip, including new features.
 
 
 
@@ -18,6 +16,7 @@
 * Use this register to detect the `PAULA` version.
 
 * POTINP Bit01 to Bit07 contains the Chip ID code.
+
 
 NAME      | ADDR | R/W | FUNCTION
 --------- | ---- | --- | --------
@@ -40,7 +39,7 @@ Specifications.
 
 **AUDIO legacy channels**
 
-* `PAULA` offers 4 AUDIO channels, all 8-bits PCM.
+* `PAULA` offers 4 audio channels, all 8-bits PCM.
 
 
 NAME      | ADDR | R/W | FUNCTION
@@ -53,13 +52,13 @@ AUD3      | 0D?  | W   | Channel Number 3
 
 **AUDIO legacy functions per channel**
 
-* Location must be in `Chip RAM`.
+* Location of waveform data, must be in `Chip RAM`.
 
-* Length is 16-bits (min=0, max=0xFFFF).
+* Length of waveform, in words (min=0, max=0xFFFF).
 
-* Volume (min=0, max=128).
+* Volume (min=0, max=64).
 
-* Period (example: 3546895 / 22050).
+* Period (min=2, max=0xFFFF). Example: 3546895 / 22050.
 
 
 NAME      | ADDR | R/W | FUNCTION
@@ -77,7 +76,7 @@ AUD?      | 0?E  |     | Audio channel ? reserved
 /*
 **	custom.h
 */
-    struct  AudChannel {
+    struct AudChannel {
       UWORD *ac_ptr;    /* ptr to start of waveform data */
       UWORD  ac_len;    /* length of waveform in words */
       UWORD  ac_per;    /* sample period */
@@ -115,21 +114,17 @@ INTREQ    | 09C  | W   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD
 **	dmabits.h
 */
 
-#define DMAF_SETCLR  0x8000
-#define DMAF_AUDIO   0x000F   /* 4 bit mask */
-#define DMAF_AUD0    0x0001
-#define DMAF_AUD1    0x0002
-#define DMAF_AUD2    0x0004
-#define DMAF_AUD3    0x0008
-#define DMAF_MASTER  0x0200
-#define DMAF_ALL     0x01FF   /* all dma channels */
+#define DMAB_SETCLR  (15)
+#define DMAB_AUD3    (3)
+#define DMAB_AUD2    (2)
+#define DMAB_AUD1    (1)
+#define DMAB_AUD0    (0)
 
-#define DMAB_SETCLR  15
-#define DMAB_AUD0    0
-#define DMAB_AUD1    1
-#define DMAB_AUD2    2
-#define DMAB_AUD3    3
-#define DMAB_MASTER  9
+#define DMAF_SETCLR  (1L<<15)
+#define DMAF_AUD3    (1L<<3)
+#define DMAF_AUD2    (1L<<2)
+#define DMAF_AUD1    (1L<<1)
+#define DMAF_AUD0    (1L<<0)
 ```
 
 ```
@@ -138,14 +133,12 @@ INTREQ    | 09C  | W   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD
 */
 
 #define  INTB_SETCLR  (15)  /* Set/Clear control bit. */
-#define  INTB_INTEN   (14)  /* Master interrupt (enable only ) */
 #define  INTB_AUD3    (10)  /* Audio channel 3 block finished */
 #define  INTB_AUD2    (9)   /* Audio channel 2 block finished */
 #define  INTB_AUD1    (8)   /* Audio channel 1 block finished */
 #define  INTB_AUD0    (7)   /* Audio channel 0 block finished */
 
 #define  INTF_SETCLR  (1L<<15)
-#define  INTF_INTEN   (1L<<14)
 #define  INTF_AUD3    (1L<<10)
 #define  INTF_AUD2    (1L<<9)
 #define  INTF_AUD1    (1L<<8)
@@ -161,11 +154,11 @@ Specifications.
 
 **AUDIO extended channels**
 
-* `SAGA` offers 8 AUDIO channels, all 8-bits or 16-bits PCM.
+* `SAGA` offers 8 audio channels, all 8-bits or 16-bits PCM.
 
 * The first 4 channels (AUD0 to AUD3) are accessibles either from the legacy audio register set (from DFF0Ax to DFF0Dx), 
 
-* or from the new audio register set (from DFF40x to DFF43x).
+* or from the new audio register set (from DFF40x to DFF43x), which allows to use the new `SAGA` features on them.
 
 * The new additional channels (AUD4 to AUD7) must be accessed from the new audio register set (from DFF44x to DFF47x).
 
@@ -184,15 +177,15 @@ SAUD7     | 47?  | W   | Channel Number 7
 
 **AUDIO extended functions per channel**
 
-* Location is a 32-bits address, and can be in `Chip RAM` or in `Fast RAM`.
+* Location of waveform data is a 32-bits address, can be in `Chip RAM` or in `Fast RAM`.
 
-* Length is also 32-bits (min=0, max=0x00FFFFFF).
+* Length of waveform, in words, is also 32-bits (min=0, max=0x00FFFFFF).
 
 * Volume is 8.8 for Left and Right (min=0.0, max=128.128).
 
 * Control bits for the 8/16-bits, Continuous/OneShot, and Mono/Stereo modes.
 
-* Period (example: 3546895 / 22050).
+* Period (min=2, max=0xFFFF). Example: 3546895 / 22050.
 
 
 NAME      | ADDR | R/W | FUNCTION
