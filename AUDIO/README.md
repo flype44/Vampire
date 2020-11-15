@@ -30,9 +30,13 @@ The `SAGA` chipset embeds the legacy `PAULA` 4-channels audio chip.
 
 It extends `PAULA` to a **8-channels** audio chip.
 
-It supports 8-bits and **16-bits** wavedata.
+It supports 8-bits and **16-bits** PCM wavedata.
 
-It also includes some specific **new features**.
+It supports replaying from either Chip RAM or **Fast RAM**.
+
+It supports much longer samples, up to **32MB** (in 8-bits) and **64MB** (in 16-bits).
+
+It also includes some other interesting **new features** (OneShot mode, Stereo mode).
 
 It is only available on the `Vampire` **standalone** cards, contrary to the `Vampire` **accelerators** cards.
 
@@ -219,13 +223,11 @@ Below are the `SAGA` extended `PAULA` specifications.
 
 ### Sysnopis
 
-`SAGA` offers 8 audio channels, all 8-bits or 16-bits, BigEndian, PCM wavedata.
+The first 4 channels (`AUD0` to `AUD3`) are accessibles either from the legacy audio register set (from `DFF0Ax` to `DFF0Dx`), 
 
-The first 4 channels (AUD0 to AUD3) are accessibles either from the legacy audio register set (from DFF0Ax to DFF0Dx), 
+or from the **new audio register set** (from `DFF40x` to `DFF43x`), which allows to use the new `SAGA` features on them.
 
-or from the **new audio register set** (from DFF40x to DFF43x), which allows to use the new `SAGA` features on them.
-
-The new additional channels (AUD4 to AUD7) must be accessed from the **new audio register set** (from DFF44x to DFF47x).
+The new additional channels (`AUD4` to `AUD7`) must be accessed from the **new audio register set** (from `DFF44x` to `DFF47x`).
 
 ### Registers
 
