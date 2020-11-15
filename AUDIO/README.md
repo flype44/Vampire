@@ -1,6 +1,5 @@
 # Vampire SAGA AUDIO chipset
 
-
 > (C) Copyright 2016-2020 APOLLO-Team
 
 Written and maintained by `flype`, with the great help from the `APOLLO-Team` members.
@@ -9,45 +8,51 @@ This article describes all the `SAGA` audio features, and is still in **Work In 
 
 ![Vampire Logo](V_LOGO.png)
 
-
 # License
-
 
 This documentation and associated files are licensed under the [Mozilla Public License 2.0](LICENSE)
 
 Permissions of this weak copyleft license are conditioned on making available source code of licensed files and modifications of those files under the same license (or in certain cases, one of the GNU licenses). Copyright and license notices must be preserved. Contributors provide an express grant of patent rights. However, a larger work using the licensed work may be distributed under different terms and without source code for files added in the larger work.
 
-
 # Documentation
-
 
 It is intended to the developers who plans to use the `Vampire` audio chip for their programs or games, and to help the community to write drivers. All the specifications mentionned in this documentation always refers to the latest version. Take care to use latest `Vampire` core version in your programs (see below).
 
-The `SAGA` chipset embeds the legacy `PAULA` 4-channels audio chip. It extends `PAULA` to a 8-channels audio chip, including new features. It is only available on the `Vampire` _standalone_ cards, in opposite to the `Vampire` _accelerators_ cards.
-
-
-# Vampire core releases
-
+# Core releases
 
 Latest `Vampire` cores are officially distributed from [here](https://www.apollo-accelerators.com/wiki/doku.php/start#core_and_software_updates). 
 
 Additionally, Beta cores are regularly distributed in the official `ApolloTeam` Discord Channel [here](https://discord.gg/bM684VW).
 
+# Introduction
 
-# PAULA identifier register
+The `SAGA` chipset embeds the legacy `PAULA` 4-channels audio chip.
 
+It extends `PAULA` to a **8-channels** audio chip, including **new features**.
 
-* Use this register to detect the `PAULA` version.
+It is only available on the `Vampire` **standalone** cards, in opposite to the `Vampire` **accelerators** cards.
 
-* POTINP Bit01 to Bit07 contains the Chip ID code [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node018B.html).
+# PAULA legacy registers (AUD0 to AUD3)
 
-* If non-zero then the `SAGA` extended `PAULA` audio chip is available.
+As reminder, below are the legacy `PAULA` specifications.
 
+## AUDIO Chip Identifier register
+
+### Sysnopis
+
+Use this register to detect the `PAULA` version.
+
+POTINP Bit01 to Bit07 contains the Chip ID code [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node018B.html).
+
+If non-zero then the `SAGA` extended `PAULA` audio chip is available.
+
+### Registers
 
 NAME      | ADDR | R/W | FUNCTION
 --------- | ---- | --- | --------
 POTINP    | 016  |  R  | Paula chip ID (0=Paula, 1=Extended)
 
+### Examples
 
 ```
 UWORD GetPaulaID()
@@ -57,21 +62,15 @@ UWORD GetPaulaID()
 }
 ```
 
-
-
-# PAULA legacy registers (AUD0 to AUD3)
-
-
-As reminder, below are the legacy `PAULA` specifications.
-
-
 ## AUDIO legacy channels
 
+### Sysnopis
 
-* `PAULA` offers 4 audio channels.
+`PAULA` offers 4 audio channels.
 
-* All channels handles 8-bits BigEndian PCM wavedata.
+All channels are 8-bits, BigEndian, PCM wavedata.
 
+### Registers
 
 NAME      | ADDR | R/W | FUNCTION
 --------- | ---- | --- | --------
@@ -80,18 +79,19 @@ AUD1      | 0B?  |  W  | Channel Number 1
 AUD2      | 0C?  |  W  | Channel Number 2
 AUD3      | 0D?  |  W  | Channel Number 3
 
-
 ## AUDIO legacy functions per channel
 
+### Sysnopis
 
-* Location of waveform data, must be located in `Chip RAM`.
+Location of waveform data, must be located in `Chip RAM`.
 
-* Length of waveform, in words (min=0, max=0xFFFF) (eg. 128KB).
+Length of waveform, in words (min=0, max=0xFFFF) (eg. 128KB).
 
-* Period (min=0, max=0xFFFF). Example: 3546895 / 22050.
+Period (min=0, max=0xFFFF). Example: 3546895 / 22050.
 
-* Volume (min=0, max=64).
+Volume (min=0, max=64).
 
+### Registers
 
 NAME      | ADDR | R/W | FUNCTION
 --------- | ---- | --- | --------
@@ -104,6 +104,7 @@ AUD?DAT   | 0?A  |  W  | Audio channel ? data
 AUD?      | 0?C  |     | Audio channel ? reserved
 AUD?      | 0?E  |     | Audio channel ? reserved
 
+### Examples
 
 [custom.h](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_2._guide/node00CD.html)
 
@@ -118,18 +119,19 @@ struct AudChannel {
 } aud[4];
 ```
 
-
 ## AUDIO legacy control registers
 
+### Sysnopis
 
-* ADKCON bits [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0012.html)
+ADKCON bits [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0012.html)
 
-* DMACON bits [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node002F.html)
+DMACON bits [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node002F.html)
 
-* INTENA bits [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0036.html)
+INTENA bits [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0036.html)
 
-* INTREQ bits [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0037.html)
+INTREQ bits [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0037.html)
 
+### Registers
 
 NAME      | ADDR | R/W | FUNCTION
 --------- | ---- | --- | --------
@@ -142,6 +144,7 @@ INTENA    | 09A  | W   | Interrupt enable bits  (Bit07 to Bit10, for AUD0 to AUD
 INTREQR   | 01E  | R   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD3)
 INTREQ    | 09C  | W   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD3)
 
+### Examples
 
 [adkbits.h](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_2._guide/node00C6.html)
 
@@ -167,6 +170,7 @@ INTREQ    | 09C  | W   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD
 #define ADKF_USE0V1  (1L<<ADKB_USE0V1)   /* Use aud chan 0 to modulate volume of 1  */
 ```
 
+### Examples
 
 [dmabits.h](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_2._guide/node00C8.html)
 
@@ -185,6 +189,7 @@ INTREQ    | 09C  | W   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD
 #define DMAF_AUDIO   (0x000F)            /* Enable DMA for ALL Audio channels */
 ```
 
+### Examples
 
 [intbits.h](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_2._guide/node00CE.html)
 
@@ -202,24 +207,23 @@ INTREQ    | 09C  | W   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD
 #define INTF_AUD0    (1L<<INTB_AUD0)     /* Audio channel 0 block finished */
 ```
 
-
 # PAULA extended registers (AUD4 to AUD7)
-
 
 Below are the `SAGA` extended `PAULA` specifications.
 
-
 ## AUDIO extended channels
 
+### Sysnopis
 
-* `SAGA` offers 8 audio channels, all 8-bits or 16-bits BigEndian PCM.
+`SAGA` offers 8 audio channels, all 8-bits or 16-bits, BigEndian, PCM wavedata.
 
-* The first 4 channels (AUD0 to AUD3) are accessibles either from the legacy audio register set (from DFF0Ax to DFF0Dx), 
+The first 4 channels (AUD0 to AUD3) are accessibles either from the legacy audio register set (from DFF0Ax to DFF0Dx), 
 
-* or from the new audio register set (from DFF40x to DFF43x), which allows to use the new `SAGA` features on them.
+or from the **new audio register set** (from DFF40x to DFF43x), which allows to use the new `SAGA` features on them.
 
-* The new additional channels (AUD4 to AUD7) must be accessed from the new audio register set (from DFF44x to DFF47x).
+The new additional channels (AUD4 to AUD7) must be accessed from the **new audio register set** (from DFF44x to DFF47x).
 
+### Registers
 
 NAME      | ADDR | R/W | FUNCTION
 --------- | ---- | --- | --------
@@ -232,6 +236,7 @@ SAUD5     | 45?  |  W  | Channel Number 5
 SAUD6     | 46?  |  W  | Channel Number 6
 SAUD7     | 47?  |  W  | Channel Number 7
 
+### Examples
 
 ```
 /* Useful macros */
@@ -249,20 +254,21 @@ SAUD7     | 47?  |  W  | Channel Number 7
 #define SAUD_PER(CH)         SAUD_REG(CH, 0x0C) /* period   */
 ```
 
-
 ## AUDIO extended functions per channel
 
+### Sysnopis
 
-* Location of waveform data is a 32-bits address, can be in `Chip RAM` or in `Fast RAM`.
+Location of waveform data is a 32-bits address, can be in `Chip RAM` or in `Fast RAM`.
 
-* Length of waveform, in words, is also 32-bits (min=0, max=0x00FFFFFF) (eg. 32MB for 8-bits PCM, 64MB for 16-bits PCM).
+Length of waveform, in words, is also 32-bits (min=0, max=0x00FFFFFF) (eg. 32MB for 8-bits PCM, 64MB for 16-bits PCM).
 
-* Volume is 8.8 for Left and Right (min=0.0, max=128.128).
+Volume is 8.8 for Left and Right (min=0.0, max=128.128).
 
-* Control bits for the 8/16-bits, Continuous/OneShot, and Mono/Stereo modes.
+Control bits for the 8/16-bits, Continuous/OneShot, and Mono/Stereo modes.
 
-* Period (min=2, max=0xFFFF). Example: 3546895 / 22050.
+Period (min=2, max=0xFFFF). Example: 3546895 / 22050.
 
+### Registers
 
 NAME      | ADDR | R/W | FUNCTION
 --------- | ---- | --- | --------
@@ -272,6 +278,8 @@ SAUD?VOL  | 4?8  |  W  | Audio channel ? volume
 SAUD?CTL  | 4?A  |  W  | Audio channel ? control bits
 SAUD?PER  | 4?C  |  W  | Audio channel ? period
 SAUD?     | 4?E  |     | Audio channel ? reserved
+
+### Examples
 
 ```
 struct SAudChannel {
@@ -283,6 +291,24 @@ struct SAudChannel {
     UWORD  sac_pad;    /* unused   */
 } saud[ MAX_CHANNELS ];
 ```
+
+### Examples
+
+```
+#define SAUDCTLB_ENDIANNESS  (4) /* 0=BigEndian,  1=LittleEndian [UNIMPLEMENTED] */
+#define SAUDCTLB_INTERLEAVED (3) /* 0=Contiguous, 1=Interleaved  [UNIMPLEMENTED] */
+#define SAUDCTLB_STEREO      (2) /* 0=Mono,       1=Stereo       [IMPLEMENTED]   */
+#define SAUDCTLB_ONESHOT     (1) /* 0=Continuous, 1=OneShot      [IMPLEMENTED]   */
+#define SAUDCTLB_16BITS      (0) /* 0=8-bits,     1=16-bits      [IMPLEMENTED]   */
+
+#define SAUDCTLF_ENDIANNESS  (1L<<SAUDCTLB_ENDIANNESS)
+#define SAUDCTLF_INTERLEAVED (1L<<SAUDCTLB_INTERLEAVED)
+#define SAUDCTLF_STEREO      (1L<<SAUDCTLB_STEREO)
+#define SAUDCTLF_ONESHOT     (1L<<SAUDCTLB_ONESHOT)
+#define SAUDCTLF_16BITS      (1L<<SAUDCTLB_16BITS)
+```
+
+### Examples
 
 ```
 /* Example using macros */
@@ -302,6 +328,7 @@ void example(void)
 }
 ```
 
+### Examples
 
 ```
 /* Example using a structure */
@@ -323,16 +350,19 @@ void example(void)
 }
 ```
 
-
 ## AUDIO extended control registers
 
+### Sysnopis
 
-* New DMACON2 bits
+New ADKCON2 bits
 
-* New INTENA2 bits
+New DMACON2 bits
 
-* New INTREQ2 bits
+New INTENA2 bits
 
+New INTREQ2 bits
+
+### Registers
 
 NAME      | ADDR | R/W | FUNCTION
 --------- | ---- | --- | --------
@@ -345,6 +375,7 @@ INTENA2   | 29A  |  W  | Interrupt enable bits (Bit00 to Bit03, for AUD4 to AUD7
 INTREQR2  | 21E  |  R  | Interrupt request bits (Bit00 to Bit03, for AUD4 to AUD7)
 INTREQ2   | 29C  |  W  | Interrupt request bits (Bit00 to Bit03, for AUD4 to AUD7)
 
+### Examples
 
 ```
 /* vampire/saga_audio.h */
@@ -363,6 +394,8 @@ INTREQ2   | 29C  |  W  | Interrupt request bits (Bit00 to Bit03, for AUD4 to AUD
 #define DMA2F_AUDIO          (0x000F)             /* Enable DMA for ALL Audio channels */
 ```
 
+### Examples
+
 ```
 /* vampire/saga_audio.h */
 
@@ -379,6 +412,7 @@ INTREQ2   | 29C  |  W  | Interrupt request bits (Bit00 to Bit03, for AUD4 to AUD
 #define INT2F_AUD4           (1L<<INT2B_AUD4)     /* Audio channel 4 block finished */
 ```
 
+### Examples
 
 ```
 #include "vampire/saga_audio.h"
@@ -396,26 +430,19 @@ void example(void)
 }
 ```
 
-
 # PAULA interrupt vectors (AUD0 to AUD7)
 
-
-* AMIGA interrupts auto-vectors table [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node016F.html)
-
+AMIGA interrupts auto-vectors table [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node016F.html)
 
 ![Vector Table](VectorTable.png)
 
-
 # Related ressources files
 
+> Refers to [PlaySnd.c](PlaySnd.c) for a very simple C-lang example.
 
-* Refers to [PlaySnd.c](PlaySnd.c) for a very simple C-lang example.
-
-* Refers to [saga_audio.h](saga_audio.h) for useful macros and constants to include in your programs.
-
+> Refers to [saga_audio.h](saga_audio.h) for useful C-lang macros and constants to include in your programs.
 
 # Frequently Asked Question
-
 
 > Is it or will it be available on the `Vampire` (V2) accelerators ?
 
