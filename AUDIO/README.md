@@ -65,7 +65,7 @@ UWORD GetPaulaID()
 As reminder, below are the legacy `PAULA` specifications.
 
 
-**AUDIO legacy channels**
+## AUDIO legacy channels
 
 
 * `PAULA` offers 4 audio channels.
@@ -81,7 +81,7 @@ AUD2      | 0C?  |  W  | Channel Number 2
 AUD3      | 0D?  |  W  | Channel Number 3
 
 
-**AUDIO legacy functions per channel**
+## AUDIO legacy functions per channel
 
 
 * Location of waveform data, must be located in `Chip RAM`.
@@ -119,7 +119,7 @@ struct AudChannel {
 ```
 
 
-**AUDIO legacy control registers**
+## AUDIO legacy control registers
 
 
 * ADKCON bits [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0012.html)
@@ -209,7 +209,7 @@ INTREQ    | 09C  | W   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD
 Below are the `SAGA` extended `PAULA` specifications.
 
 
-**AUDIO extended channels**
+## AUDIO extended channels
 
 
 * `SAGA` offers 8 audio channels, all 8-bits or 16-bits BigEndian PCM.
@@ -250,7 +250,7 @@ SAUD7     | 47?  |  W  | Channel Number 7
 ```
 
 
-**AUDIO extended functions per channel**
+## AUDIO extended functions per channel
 
 
 * Location of waveform data is a 32-bits address, can be in `Chip RAM` or in `Fast RAM`.
@@ -324,7 +324,7 @@ void example(void)
 ```
 
 
-**AUDIO extended control registers**
+## AUDIO extended control registers
 
 
 * New DMACON2 bits
