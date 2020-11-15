@@ -28,7 +28,11 @@ Additionally, Beta cores are regularly distributed in the official `ApolloTeam` 
 
 The `SAGA` chipset embeds the legacy `PAULA` 4-channels audio chip.
 
-It extends `PAULA` to a **8-channels** audio chip, including **new features**.
+It extends `PAULA` to a **8-channels** audio chip.
+
+It supports 8-bits and **16-bits** wavedata.
+
+It also includes some specific **new features**.
 
 It is only available on the `Vampire` **standalone** cards, in opposite to the `Vampire` **accelerators** cards.
 
@@ -36,13 +40,13 @@ It is only available on the `Vampire` **standalone** cards, in opposite to the `
 
 As reminder, below are the legacy `PAULA` specifications.
 
-## AUDIO Chip Identifier register
+## AUDIO chip identifier register
 
 ### Sysnopis
 
 Use this register to detect the `PAULA` version.
 
-POTINP Bit01 to Bit07 contains the Chip ID code [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node018B.html).
+`POTINP` Bit01 to Bit07 contains the Chip ID code [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node018B.html).
 
 If non-zero then the `SAGA` extended `PAULA` audio chip is available.
 
