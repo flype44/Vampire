@@ -4,7 +4,7 @@
 
 This article describes all the `Vampire` hardware features, and is still in **Work In Progress** status.
 
-![Vampire Logo](../ASSETS/V_LOGO.png)
+![Vampire Logo](ASSETS/V_LOGO.png)
 
 # License
 
