@@ -24,7 +24,7 @@ Additionally, Beta cores are regularly distributed in the official `ApolloTeam` 
 
 # Introduction
 
-The `Vampire` standalone (V4) embeds a ETHERNET phy and a connector.
+The `Vampire` standalone (V4) embeds a hardware ETHERNET phy and a connector.
 
 The `SAGA` chipset provides a set of registers to used in a driver (`SANA2` based on AmigaOS).
 
@@ -85,9 +85,9 @@ INTREQ2    | DFF29C |  W  | Interrupt request bits
 
 # Related ressources files
 
-> The [SAGADriver](https://www.apollo-accelerators.com/wiki/doku.php/saga:updates) package include a `SANA2` ethernet driver.
+* The [SAGADriver](https://www.apollo-accelerators.com/wiki/doku.php/saga:updates) package include a `SANA2` ethernet driver.
 
-> Refers to [saga_ethernet.h](saga_ethernet.h) for useful C-lang macros and constants to include in your programs.
+* Refers to [saga_ethernet.h](saga_ethernet.h) for useful C-lang macros and constants to include in your programs.
 
 # Frequently Asked Question
 
