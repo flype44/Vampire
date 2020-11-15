@@ -54,7 +54,7 @@ AUD3      | 0D?  | W   | Channel Number 3
 
 * Location of waveform data, must be in `Chip RAM`.
 
-* Length of waveform, in words (min=0, max=0xFFFF).
+* Length of waveform, in words (min=0, max=0xFFFF) (eg. 128KB).
 
 * Volume (min=0, max=64).
 
@@ -179,7 +179,7 @@ SAUD7     | 47?  | W   | Channel Number 7
 
 * Location of waveform data is a 32-bits address, can be in `Chip RAM` or in `Fast RAM`.
 
-* Length of waveform, in words, is also 32-bits (min=0, max=0x00FFFFFF).
+* Length of waveform, in words, is also 32-bits (min=0, max=0x00FFFFFF) (eg. 32MB for 8-bits PCM, 64MB for 16-bits PCM).
 
 * Volume is 8.8 for Left and Right (min=0.0, max=128.128).
 
