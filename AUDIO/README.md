@@ -345,11 +345,11 @@ void example(void)
 	
 	for(int channel = 0; channel < MAX_CHANNELS; channel++)
 	{
-		saud[ channel ].ac_ptr = ( ULONG*) ( bufptr );
-		saud[ channel ].ac_len = ( ULONG ) ( buflen >> 1 );
-		saud[ channel ].ac_vol = ( UWORD ) ( ( 128 << 8 ) | 128 );
-		saud[ channel ].ac_ctl = ( UWORD ) ( SAUDCTLF_16BITS | SAUDCTLF_ONESHOT );
-		saud[ channel ].ac_per = ( UWORD ) ( PAULA_CLOCK / 22050 );
+		saud[ channel ].sac_ptr = ( ULONG*) ( bufptr );
+		saud[ channel ].sac_len = ( ULONG ) ( buflen >> 1 );
+		saud[ channel ].sac_vol = ( UWORD ) ( ( 128 << 8 ) | 128 );
+		saud[ channel ].sac_ctl = ( UWORD ) ( SAUDCTLF_16BITS | SAUDCTLF_ONESHOT );
+		saud[ channel ].sac_per = ( UWORD ) ( PAULA_CLOCK / 22050 );
 	}
 }
 ```
