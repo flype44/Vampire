@@ -188,7 +188,7 @@ struct SAudChannel {
 
 #define INT2B_SETCLR         (15) /* set/clear */
 #define INT2B_SLOT14         (14) /* reserved  */
-#define INT2B_SLOT13         (13) /* reserved  */
+#define INT2B_ETHERNET       (13) /* ethernet  */
 #define INT2B_SLOT12         (12) /* reserved  */
 #define INT2B_SLOT11         (11) /* unused    */
 #define INT2B_SLOT10         (10) /* unused    */
@@ -205,7 +205,7 @@ struct SAudChannel {
 
 #define INT2F_SETCLR         (1L<<INT2B_SETCLR)
 #define INT2F_SLOT14         (1L<<INT2B_SLOT14)
-#define INT2F_SLOT13         (1L<<INT2B_SLOT13)
+#define INT2F_ETHERNET       (1L<<INT2B_ETHERNET)
 #define INT2F_SLOT12         (1L<<INT2B_SLOT12)
 #define INT2F_SLOT11         (1L<<INT2B_SLOT11)
 #define INT2F_SLOT10         (1L<<INT2B_SLOT10)
