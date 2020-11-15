@@ -410,22 +410,24 @@ It is eventually planned for the V2 boards within the `GOLD3` core.
 
 Main difficulties are : Time and Available space in the V2 FPGA.
 
-There is no date announced, it all depends on the time the APOLLO-Team may spend on this project.
-
-> Are there software that already use the new audio chip ?
-
-There was a EaglePlayer plugin, but it is deprecated since some refactoring on the audio chip.
-
-There is the Amiga MilkyTracker port, by Neoman (year 2020), which fully implement the 8-channels, and 16-bits modes.
-
-There are plans for a AHI driver (any help would be appreciated).
-
-There are plans for a audio.device (any help would be appreciated).
+There is no date announced, it all depends on the time the APOLLO-Team can spend on this project.
 
 > It was announced 16 channels, the documentation mentions 8 channels, why ?
 
 Specifications were reconsidered due to 2 main reasons.
 
-First, implementing 16 channels on the current FPGA appears to be more greedy than reasonible.
+First, implementing 16 channels on the current FPGA appears to be more greedy than it'd be reasonible.
 
 Second, the AC68080 is very powerful enough to use software audio mixing (maybe only 5-10% of cpu, if well done).
+
+> Are there software that already use the new audio chip ?
+
+There was a EaglePlayer plugin (year 2018), but it is deprecated since some refactoring on the audio chip.
+
+There is the Amiga MilkyTracker port, by Neoman (year 2020), which fully implements the 8-channels, and 16-bits modes.
+
+There are plans for a AHI driver (any help would be appreciated).
+
+There are plans for a audio.device (any help would be appreciated).
+
+There are plans for a ptreplay routine (any help would be appreciated).
