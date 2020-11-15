@@ -2,9 +2,9 @@
 #define	VAMPIRE_SAGA_AUDIO_H
 /*
 **	$VER: saga/audio.h 0.1 (11.11.2020)
-**	
+**
 **	Vampire SAGA AUDIO hardware
-**	
+**
 **	(C) Copyright 2015-2020 APOLLO-Team
 **	    All Right Reserved
 */
@@ -53,8 +53,7 @@
 
 /* new defines for SAUDx */
 
-struct SAudChannel
-{
+struct SAudChannel {
     ULONG *ac_loc;    /* location */
     ULONG  ac_len;    /* length   */
     UWORD  ac_vol;    /* volume   */
@@ -148,32 +147,76 @@ struct SAudChannel
 
 /* new defines for DMACON2 */
 
-#define DMA2B_SETCLR         (15)
-#define DMA2B_AUD7           (3)
-#define DMA2B_AUD6           (2)
-#define DMA2B_AUD5           (1)
-#define DMA2B_AUD4           (0)
+#define DMA2B_SETCLR         (15) /* set/clear */
+#define DMA2B_SLOT14         (14) /* reserved  */
+#define DMA2B_SLOT13         (13) /* reserved  */
+#define DMA2B_SLOT12         (12) /* reserved  */
+#define DMA2B_SLOT11         (11) /* unused    */
+#define DMA2B_SLOT10         (10) /* unused    */
+#define DMA2B_SLOT09         (9)  /* unused    */
+#define DMA2B_SLOT08         (8)  /* unused    */
+#define DMA2B_SLOT07         (7)  /* unused    */
+#define DMA2B_SLOT06         (6)  /* unused    */
+#define DMA2B_SLOT05         (5)  /* unused    */
+#define DMA2B_SLOT04         (4)  /* unused    */
+#define DMA2B_AUD7           (3)  /* channel 7 */
+#define DMA2B_AUD6           (2)  /* channel 6 */
+#define DMA2B_AUD5           (1)  /* channel 5 */
+#define DMA2B_AUD4           (0)  /* channel 4 */
 
-#define DMA2F_AUDIO          (0x0FFF)
 #define DMA2F_SETCLR         (1L<<DMA2B_SETCLR)
+#define DMA2F_SLOT14         (1L<<DMA2B_SLOT14)
+#define DMA2F_SLOT13         (1L<<DMA2B_SLOT13)
+#define DMA2F_SLOT12         (1L<<DMA2B_SLOT12)
+#define DMA2F_SLOT11         (1L<<DMA2B_SLOT11)
+#define DMA2F_SLOT10         (1L<<DMA2B_SLOT10)
+#define DMA2F_SLOT09         (1L<<DMA2B_SLOT09)
+#define DMA2F_SLOT08         (1L<<DMA2B_SLOT08)
+#define DMA2F_SLOT07         (1L<<DMA2B_SLOT07)
+#define DMA2F_SLOT06         (1L<<DMA2B_SLOT06)
+#define DMA2F_SLOT05         (1L<<DMA2B_SLOT05)
+#define DMA2F_SLOT04         (1L<<DMA2B_SLOT04)
 #define DMA2F_AUD7           (1L<<DMA2B_AUD7)
 #define DMA2F_AUD6           (1L<<DMA2B_AUD6)
 #define DMA2F_AUD5           (1L<<DMA2B_AUD5)
 #define DMA2F_AUD4           (1L<<DMA2B_AUD4)
+#define DMA2F_AUDIO          (DMA2F_AUD4|DMA2F_AUD5|DMA2F_AUD6|DMA2F_AUD7) /* all audio channels */
 
 /* new defines for INTENA2 and INTREQ2 */
 
-#define INT2B_SETCLR         (15)
-#define INT2B_AUD7           (3)
-#define INT2B_AUD6           (2)
-#define INT2B_AUD5           (1)
-#define INT2B_AUD4           (0)
+#define INT2B_SETCLR         (15) /* set/clear */
+#define INT2B_SLOT14         (14) /* reserved  */
+#define INT2B_SLOT13         (13) /* reserved  */
+#define INT2B_SLOT12         (12) /* reserved  */
+#define INT2B_SLOT11         (11) /* unused    */
+#define INT2B_SLOT10         (10) /* unused    */
+#define INT2B_SLOT09         (9)  /* unused    */
+#define INT2B_SLOT08         (8)  /* unused    */
+#define INT2B_SLOT07         (7)  /* unused    */
+#define INT2B_SLOT06         (6)  /* unused    */
+#define INT2B_SLOT05         (5)  /* unused    */
+#define INT2B_SLOT04         (4)  /* unused    */
+#define INT2B_AUD7           (3)  /* channel 7 */
+#define INT2B_AUD6           (2)  /* channel 6 */
+#define INT2B_AUD5           (1)  /* channel 5 */
+#define INT2B_AUD4           (0)  /* channel 4 */
 
-#define INT2F_AUDIO          (0x0FFF)
 #define INT2F_SETCLR         (1L<<INT2B_SETCLR)
+#define INT2F_SLOT14         (1L<<INT2B_SLOT14)
+#define INT2F_SLOT13         (1L<<INT2B_SLOT13)
+#define INT2F_SLOT12         (1L<<INT2B_SLOT12)
+#define INT2F_SLOT11         (1L<<INT2B_SLOT11)
+#define INT2F_SLOT10         (1L<<INT2B_SLOT10)
+#define INT2F_SLOT09         (1L<<INT2B_SLOT09)
+#define INT2F_SLOT08         (1L<<INT2B_SLOT08)
+#define INT2F_SLOT07         (1L<<INT2B_SLOT07)
+#define INT2F_SLOT06         (1L<<INT2B_SLOT06)
+#define INT2F_SLOT05         (1L<<INT2B_SLOT05)
+#define INT2F_SLOT04         (1L<<INT2B_SLOT04)
 #define INT2F_AUD7           (1L<<INT2B_AUD7)
 #define INT2F_AUD6           (1L<<INT2B_AUD6)
 #define INT2F_AUD5           (1L<<INT2B_AUD5)
 #define INT2F_AUD4           (1L<<INT2B_AUD4)
+#define INT2F_AUDIO          (INT2F_AUD4|INT2F_AUD5|INT2F_AUD6|INT2F_AUD7) /* all audio channels */
 
 #endif	/* VAMPIRE_SAGA_AUDIO_H */
