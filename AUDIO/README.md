@@ -10,6 +10,14 @@ The purpose of this article is to bring valuable information and control over th
 ![Vampire Logo](V_LOGO.png)
 
 
+# License
+
+
+This documentation and associated files are licensed under the [Mozilla Public License 2.0](LICENSE)
+
+Permissions of this weak copyleft license are conditioned on making available source code of licensed files and modifications of those files under the same license (or in certain cases, one of the GNU licenses). Copyright and license notices must be preserved. Contributors provide an express grant of patent rights. However, a larger work using the licensed work may be distributed under different terms and without source code for files added in the larger work.
+
+
 # Documentation
 
 
@@ -21,13 +29,21 @@ This documentation is written by the `flype`, with the great help from the `APOL
 
 The `SAGA` chipset embeds the legacy `PAULA` 4-channels audio chip.
 
-The chipset extends `PAULA` to a 8-channels audio chip, including new features.
+It extends `PAULA` to a 8-channels audio chip, including new features.
 
-This is only available on the Vampire _standalone_ cards, in opposite to the Vampire _accelerators_ cards.
+This is only available on the `Vampire` _standalone_ cards, in opposite to the `Vampire` _accelerators_ cards.
+
+Refers to [PlaySnd.c](PlaySnd.c) for a very simple C-lang example.
 
 Refers to [saga_audio.h](saga_audio.h) for useful macros and constants to include in your programs.
 
-Refers to [PlaySnd.c](PlaySnd.c) for a very simple C-lang example.
+
+# Releases
+
+
+Latest `Vampire` cores are officially distributed from [here](https://www.apollo-accelerators.com/wiki/doku.php/start#core_and_software_updates). 
+
+Additionally, Beta cores are regularly distributed, for testing purposes, in the official `ApolloTeam` Discord Channel.
 
 
 # PAULA identifier register
