@@ -43,7 +43,7 @@ Refers to [saga_audio.h](saga_audio.h) for useful macros and constants to includ
 
 Latest `Vampire` cores are officially distributed from [here](https://www.apollo-accelerators.com/wiki/doku.php/start#core_and_software_updates). 
 
-Additionally, Beta cores are regularly distributed, for testing purposes, in the official `ApolloTeam` Discord Channel [here](https://discord.gg/wwEMn5dmg4).
+Additionally, Beta cores are regularly distributed, for testing purposes, in the official `ApolloTeam` Discord Channel [here](https://discord.gg/bM684VW).
 
 
 # PAULA identifier register
