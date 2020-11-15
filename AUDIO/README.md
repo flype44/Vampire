@@ -11,9 +11,9 @@ The chipset extends `PAULA` to a 8-channels audio chip, including new features.
 
 This is only available on the Vampire _standalone_ cards, in opposite to the Vampire _accelerators_ cards.
 
-Refers to ![saga_audio.h](saga_audio.h) for useful macros and constants to include in your programs.
+Refers to ![saga_audio.h] for useful macros and constants to include in your programs.
 
-Refers to ![PlaySnd.c](PlaySnd.c) for a simple C-lang example.
+Refers to ![PlaySnd.c] for a very simple C-lang example.
 
 
 # PAULA identifier register
