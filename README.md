@@ -24,10 +24,16 @@ Additionally, Beta cores are regularly distributed in the official `ApolloTeam` 
 
 # Summary
 
-Below are detailed articles, per chip component.
+Below are detailed (WIP) articles, per chip component.
+
+* [Vampire CPU](CPU)
 
 * [Vampire SAGA AUDIO chipset](AUDIO)
 
 * [Vampire SAGA VIDEO chipset](VIDEO)
 
 * [Vampire SAGA ETHERNET chipset](ETHERNET)
+
+* [Vampire SAGA FLASH chipset](FLASH)
+
+* [Vampire SAGA SDCARD chipset](SDCARD)
