@@ -3,10 +3,10 @@
 /*
 **	$VER: saga/audio.h 0.1 (11.11.2020)
 **	
-**  Vampire SAGA AUDIO hardware
+**	Vampire SAGA AUDIO hardware
 **	
 **	(C) Copyright 2015-2020 APOLLO-Team
-**		All Right Reserved
+**	    All Right Reserved
 */
 
 /*
