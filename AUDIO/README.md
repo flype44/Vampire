@@ -21,17 +21,9 @@ Permissions of this weak copyleft license are conditioned on making available so
 # Documentation
 
 
-It is intended to the developers who plans to use the `Vampire` audio chip for their programs or games, and to help the community to write drivers.
+It is intended to the developers who plans to use the `Vampire` audio chip for their programs or games, and to help the community to write drivers. All the specifications mentionned in this documentation always refers to the latest version. Take care to use latest `Vampire` core version in your programs (see below).
 
-All the specifications mentionned in this documentation always refers to the latest version.
-
-Take care to use latest `Vampire` core version in your programs (see below).
-
-The `SAGA` chipset embeds the legacy `PAULA` 4-channels audio chip.
-
-It extends `PAULA` to a 8-channels audio chip, including new features.
-
-It is only available on the `Vampire` _standalone_ cards, in opposite to the `Vampire` _accelerators_ cards.
+The `SAGA` chipset embeds the legacy `PAULA` 4-channels audio chip. It extends `PAULA` to a 8-channels audio chip, including new features. It is only available on the `Vampire` _standalone_ cards, in opposite to the `Vampire` _accelerators_ cards.
 
 
 # Vampire CORE Releases
