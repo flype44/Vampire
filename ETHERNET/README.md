@@ -62,8 +62,6 @@ TXQUEUELEN | DE0044 |  ?  | number of words in TX FIFO
 
 NAME       | ADDR   | R/W | FUNCTION
 ---------- | ------ | --- | --------
-DMACONR2   | DFF202 |  R  | DMA control
-DMACON2    | DFF296 |  W  | DMA control
 INTENAR2   | DFF21C |  R  | Interrupt enable bits
 INTENA2    | DFF29A |  W  | Interrupt enable bits
 INTREQR2   | DFF21E |  R  | Interrupt request bits
