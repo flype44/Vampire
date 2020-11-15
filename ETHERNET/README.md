@@ -95,4 +95,4 @@ Not on board. However, the V4 provides a set of IOs pins that be used for such a
 
 > What internet speed can be reached on the V4 ?
 
-TODO
+Around 3 Megabit/sec, for now, should be faster when fully finished.
