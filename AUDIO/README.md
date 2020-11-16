@@ -14,7 +14,7 @@ Permissions of this weak copyleft license are conditioned on making available so
 
 # Documentation
 
-Written and maintained by `flype`, with the great help from the `APOLLO-Team` members. It is intended to the developers who plans to use the `Vampire` audio chip for their programs or games, and to help the community to write drivers. All the specifications mentionned in this documentation always refers to the latest version. Take care to use latest `Vampire` core version in your programs (see below).
+Written and maintained by `flype`, with the great help from the `APOLLO-Team` members. It is intended for developers who plan to use the `Vampire` audio chip for their programs or games, and to help the community to write drivers. All specifications mentioned in this documentation always refers to the latest version. Be sure to use the latest `Vampire` core version in your programs (see below).
 
 # Core releases
 
@@ -452,23 +452,23 @@ AMIGA interrupts auto-vectors table [More informations](http://amigadev.elowar.c
 
 For now it is only available on the `Vampire` (V4) standalone board.
 
-It is eventually planned for the V2 boards within the `GOLD3` core.
+It is eventually planned for the V2 boards within a `GOLD3` core.
 
-Main difficulties are : Time and Available space in the V2 FPGA.
+Main difficulties are : Time, FPGA size on the V2, and finish the V4 core first.
 
 There is no date announced, it all depends on the time the `APOLLO-Team` can spend on this project.
 
 > It was announced 16 channels, the documentation mentions 8 channels, why ?
 
-Specifications were reconsidered due to 2 main reasons.
+The specifications were reconsidered for 2 main reasons.
 
-First, implementing 16 channels on the current FPGA appears to be more greedy than it'd be reasonible.
+First, implementing 16 channels on the current FPGA appears to be more hungry than reasonable.
 
-Second, the `AC68080` is powerful enough to use software audio mixing (maybe only 5-10% of cpu, if well done).
+Second, the `Vampire` CPU is more than powerful enough to use software audio mixing (maybe only 5-10% of the CPU, if done right).
 
 > Are there software that already use the new audio chip ?
 
-There was a **EaglePlayer** plugin (year 2018), but it is deprecated since some refactoring on the audio chip.
+There was a **EaglePlayer** plugin, by Bax (year 2018), but it is obsolete since the audio chip redesign.
 
 There is the Amiga **MilkyTracker** port, by Neoman (year 2020), which fully implements the 8-channels, and 16-bits modes.
 
