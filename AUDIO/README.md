@@ -38,7 +38,7 @@ It also includes some other interesting **new features** (OneShot mode, Stereo m
 
 It is only available on the `Vampire` **standalone** cards, contrary to the `Vampire` **accelerators** cards.
 
-# PAULA legacy registers (AUD0 to AUD3)
+# PAULA specifications
 
 As reminder, below are the legacy `PAULA` specifications.
 
