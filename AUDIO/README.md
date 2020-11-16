@@ -129,13 +129,13 @@ struct AudChannel {
 
 ### Sysnopis
 
-ADKCON bits [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0012.html)
+[ADKCON bits](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0012.html)
 
-DMACON bits [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node002F.html)
+[DMACON bits](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node002F.html)
 
-INTENA bits [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0036.html)
+[INTENA bits](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0036.html)
 
-INTREQ bits [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0037.html)
+[INTREQ bits](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0037.html)
 
 ### Registers
 
