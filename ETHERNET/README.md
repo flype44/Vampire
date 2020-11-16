@@ -43,7 +43,7 @@ RX_HWPOS   | DE003C |  ?  | hardware RX write position
 TXWORD     | DE0040 |  ?  | write port for TX FIFO (32 Bits)        
 TXQUEUELEN | DE0044 |  ?  | number of words in TX FIFO              
 
-```
+```c
 #define ETHERNET_REGBASE     (0xDE0000)
 
 #define V4R_MAC1             (ETHERNET_REGBASE + 0x020)    /* DMA_ON<<31 | MAC(0:15)                   */
@@ -67,7 +67,7 @@ INTENA2    | DFF29A |  W  | Interrupt enable bits
 INTREQR2   | DFF21E |  R  | Interrupt request bits
 INTREQ2    | DFF29C |  W  | Interrupt request bits
 
-```
+```c
 #define CUSTOM_REGBASE       (0xDFF000)
 
 #define INTENAR2             (CUSTOM_REGBASE + 0x01C + 0x200)
