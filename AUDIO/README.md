@@ -56,7 +56,7 @@ If non-zero then the `SAGA` extended `PAULA` audio chip is available.
 
 NAME      | ADDR | R/W | FUNCTION
 --------- | ---- | --- | --------
-POTINP    | 016  |  R  | Paula chip ID (0=Paula, 1=Extended)
+[POTINP](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node018B.html) | 016  |  R  | Paula chip ID (0=Paula, 1=Extended)
 
 ### Examples
 
