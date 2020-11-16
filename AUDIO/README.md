@@ -101,14 +101,12 @@ Volume (min=0, max=64).
 
 NAME      | ADDR | R/W | FUNCTION
 --------- | ---- | --- | --------
-AUD?LCH   | 0?0  |  W  | Audio channel ? location (high 3 bits, 5 if ECS)
-AUD?LCL   | 0?2  |  W  | Audio channel ? location (low 15 bits)
-AUD?LEN   | 0?4  |  W  | Audio channel ? length
-AUD?PER   | 0?6  |  W  | Audio channel ? period
-AUD?VOL   | 0?8  |  W  | Audio channel ? volume
-AUD?DAT   | 0?A  |  W  | Audio channel ? data
-AUD?      | 0?C  |     | Audio channel ? reserved
-AUD?      | 0?E  |     | Audio channel ? reserved
+[AUD?LCH](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0014.html) | 0?0  |  W  | Audio channel ? location (high 3 bits, 5 if ECS)
+[AUD?LCL](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0014.html) | 0?2  |  W  | Audio channel ? location (low 15 bits)
+[AUD?LEN](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0015.html) | 0?4  |  W  | Audio channel ? length
+[AUD?PER](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0016.html) | 0?6  |  W  | Audio channel ? period
+[AUD?VOL](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0017.html) | 0?8  |  W  | Audio channel ? volume
+[AUD?DAT](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0013.html) | 0?A  |  W  | Audio channel ? data
 
 ### Examples
 
