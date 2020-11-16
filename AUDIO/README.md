@@ -40,7 +40,7 @@ It is only available on the `Vampire` **standalone** cards, contrary to the `Vam
 
 # PAULA specifications
 
-As reminder, below are the legacy `PAULA` specifications.
+As a reminder, below are the legacy `PAULA` specifications.
 
 ## AUDIO chip identifier register
 
@@ -101,12 +101,12 @@ Volume (min=0, max=64).
 
 NAME      | ADDR | R/W | FUNCTION
 --------- | ---- | --- | --------
-[AUD?LCH](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0014.html) | 0?0  |  W  | Audio channel ? location (high 3 bits, 5 if ECS)
-[AUD?LCL](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0014.html) | 0?2  |  W  | Audio channel ? location (low 15 bits)
-[AUD?LEN](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0015.html) | 0?4  |  W  | Audio channel ? length
-[AUD?PER](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0016.html) | 0?6  |  W  | Audio channel ? period
-[AUD?VOL](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0017.html) | 0?8  |  W  | Audio channel ? volume
-[AUD?DAT](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0013.html) | 0?A  |  W  | Audio channel ? data
+[AUDxLCH](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0014.html) | 0?0  |  W  | Audio channel ? location (high 3 bits, 5 if ECS)
+[AUDxLCL](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0014.html) | 0?2  |  W  | Audio channel ? location (low 15 bits)
+[AUDxLEN](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0015.html) | 0?4  |  W  | Audio channel ? length
+[AUDxPER](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0016.html) | 0?6  |  W  | Audio channel ? period
+[AUDxVOL](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0017.html) | 0?8  |  W  | Audio channel ? volume
+[AUDxDAT](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0013.html) | 0?A  |  W  | Audio channel ? data
 
 ### Examples
 
@@ -127,26 +127,24 @@ struct AudChannel {
 
 ### Sysnopis
 
-[ADKCON bits](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0012.html)
+Control modulation.
 
-[DMACON bits](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node002F.html)
+Start/Stop audio channels.
 
-[INTENA bits](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0036.html)
-
-[INTREQ bits](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0037.html)
+Be notified when a sound block is finished.
 
 ### Registers
 
 NAME      | ADDR | R/W | FUNCTION
 --------- | ---- | --- | --------
-ADKCONR   | 010  | R   | Audio control          (Bit00 to Bit07, for AUD0 to AUD3)
-ADKCON    | 09E  | W   | Audio control          (Bit00 to Bit07, for AUD0 to AUD3)
-DMACONR   | 002  | R   | DMA control            (Bit00 to Bit03, for AUD0 to AUD3)
-DMACON    | 096  | W   | DMA control            (Bit00 to Bit03, for AUD0 to AUD3)
-INTENAR   | 01C  | R   | Interrupt enable bits  (Bit07 to Bit10, for AUD0 to AUD3)
-INTENA    | 09A  | W   | Interrupt enable bits  (Bit07 to Bit10, for AUD0 to AUD3)
-INTREQR   | 01E  | R   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD3)
-INTREQ    | 09C  | W   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD3)
+[ADKCONR](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0012.html) | 010  | R   | Audio control          (Bit00 to Bit07, for AUD0 to AUD3)
+[ADKCON](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0012.html)  | 09E  | W   | Audio control          (Bit00 to Bit07, for AUD0 to AUD3)
+[DMACONR](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node002F.html) | 002  | R   | DMA control            (Bit00 to Bit03, for AUD0 to AUD3)
+[DMACON](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node002F.html)  | 096  | W   | DMA control            (Bit00 to Bit03, for AUD0 to AUD3)
+[INTENAR](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0036.html) | 01C  | R   | Interrupt enable bits  (Bit07 to Bit10, for AUD0 to AUD3)
+[INTENA](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0036.html)  | 09A  | W   | Interrupt enable bits  (Bit07 to Bit10, for AUD0 to AUD3)
+[INTREQR](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0037.html) | 01E  | R   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD3)
+[INTREQ](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0037.html)  | 09C  | W   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD3)
 
 ### Examples
 
