@@ -209,7 +209,7 @@ NAME      | ADDR | R/W | FUNCTION
 #define INTF_AUD0    (1L<<INTB_AUD0)     /* Audio channel 0 block finished */
 ```
 
-# PAULA extended registers (AUD4 to AUD7)
+# PAULA extended specifications
 
 Below are the `SAGA` extended `PAULA` specifications.
 
@@ -236,15 +236,12 @@ SAUD5     | 45?  |  W  | Channel Number 5
 SAUD6     | 46?  |  W  | Channel Number 6
 SAUD7     | 47?  |  W  | Channel Number 7
 
-### Examples
+### customs2.h
 
 ```c
-/* Useful macros */
-
 #define CUSTOM_REGBASE       (0xDFF000)
 
 #define SAUD_REGBASE(CH)     (CUSTOM_REGBASE + 0x400 + (((CH) & 0x0F) << 4))
-
 #define SAUD_REG(CH, IDX)    (SAUD_REGBASE(CH) + (IDX))
 
 #define SAUD_PTR(CH)         SAUD_REG(CH, 0x00) /* location */
@@ -279,7 +276,7 @@ SAUD?CTL  | 4?A  |  W  | Audio channel ? control bits
 SAUD?PER  | 4?C  |  W  | Audio channel ? period
 SAUD?     | 4?E  |     | Audio channel ? reserved
 
-### Examples
+### customs2.h
 
 ```c
 struct SAudChannel {
@@ -292,7 +289,7 @@ struct SAudChannel {
 } saud[ MAX_CHANNELS ];
 ```
 
-### Examples
+### customs2.h
 
 ```c
 #define SAUDCTLB_ENDIANNESS  (4) /* 0=BigEndian,  1=LittleEndian [UNIMPLEMENTED] */
@@ -354,13 +351,9 @@ void example(void)
 
 ### Sysnopis
 
-New ADKCON2 bits
+Start/Stop the new audio channels.
 
-New DMACON2 bits
-
-New INTENA2 bits
-
-New INTREQ2 bits
+Be notified when a sound block is finished.
 
 ### Registers
 
@@ -375,7 +368,7 @@ INTENA2   | 29A  |  W  | Interrupt enable bits (Bit00 to Bit03, for AUD4 to AUD7
 INTREQR2  | 21E  |  R  | Interrupt request bits (Bit00 to Bit03, for AUD4 to AUD7)
 INTREQ2   | 29C  |  W  | Interrupt request bits (Bit00 to Bit03, for AUD4 to AUD7)
 
-### Examples
+### dmabits2.h
 
 ```c
 /* vampire/saga_audio.h */
@@ -394,7 +387,7 @@ INTREQ2   | 29C  |  W  | Interrupt request bits (Bit00 to Bit03, for AUD4 to AUD
 #define DMA2F_AUDIO          (0x000F)             /* Enable DMA for ALL Audio channels */
 ```
 
-### Examples
+### intbits2.h
 
 ```c
 /* vampire/saga_audio.h */
@@ -430,7 +423,7 @@ void example(void)
 }
 ```
 
-# PAULA interrupt vectors (AUD0 to AUD7)
+# PAULA interrupt vectors
 
 AMIGA interrupts auto-vectors table [More informations](http://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node016F.html)
 
