@@ -14,7 +14,8 @@
 #include <hardware/intbits.h>
 
 #define CUSTOM_REGBASE       (0xDFF000)
-#define PAULA_CLOCK          (3546895)
+#define PAULA_CLOCK_PAL      (3546895)
+#define PAULA_CLOCK_NTSC     (3579545)
 #define MAX_CHANNELS         (8)
 
 /* new defines for POTINP */
