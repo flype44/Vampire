@@ -60,7 +60,7 @@ POTINP    | 016  |  R  | Paula chip ID (0=Paula, 1=Extended)
 
 ### Examples
 
-```
+```c
 UWORD GetPaulaID()
 {
 	/* Read Paula Chip ID (0=Paula, 1=Extended) */
@@ -114,7 +114,7 @@ AUD?      | 0?E  |     | Audio channel ? reserved
 
 [custom.h](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_2._guide/node00CD.html)
 
-```
+```c
 struct AudChannel {
     UWORD *ac_ptr;    /* pointer to start of waveform data */
     UWORD  ac_len;    /* length of waveform in words */
@@ -154,7 +154,7 @@ INTREQ    | 09C  | W   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD
 
 [adkbits.h](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_2._guide/node00C6.html)
 
-```
+```c
 #define ADKB_SETCLR  (15)             
 #define ADKB_USE3PN  (7)              
 #define ADKB_USE2P3  (6)              
@@ -180,7 +180,7 @@ INTREQ    | 09C  | W   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD
 
 [dmabits.h](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_2._guide/node00C8.html)
 
-```
+```c
 #define DMAB_SETCLR  (15)
 #define DMAB_AUD3    (3)
 #define DMAB_AUD2    (2)
@@ -199,7 +199,7 @@ INTREQ    | 09C  | W   | Interrupt request bits (Bit07 to Bit10, for AUD0 to AUD
 
 [intbits.h](http://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_2._guide/node00CE.html)
 
-```
+```c
 #define INTB_SETCLR  (15)
 #define INTB_AUD3    (10)
 #define INTB_AUD2    (9)
@@ -242,7 +242,7 @@ SAUD7     | 47?  |  W  | Channel Number 7
 
 ### Examples
 
-```
+```c
 /* Useful macros */
 
 #define CUSTOM_REGBASE       (0xDFF000)
@@ -285,7 +285,7 @@ SAUD?     | 4?E  |     | Audio channel ? reserved
 
 ### Examples
 
-```
+```c
 struct SAudChannel {
     ULONG *sac_ptr;    /* location */
     ULONG  sac_len;    /* length   */
@@ -298,7 +298,7 @@ struct SAudChannel {
 
 ### Examples
 
-```
+```c
 #define SAUDCTLB_ENDIANNESS  (4) /* 0=BigEndian,  1=LittleEndian [UNIMPLEMENTED] */
 #define SAUDCTLB_INTERLEAVED (3) /* 0=Contiguous, 1=Interleaved  [UNIMPLEMENTED] */
 #define SAUDCTLB_STEREO      (2) /* 0=Mono,       1=Stereo       [IMPLEMENTED]   */
@@ -314,7 +314,7 @@ struct SAudChannel {
 
 ### Examples
 
-```
+```c
 /* Example using macros */
 
 #include "vampire/saga_audio.h"
@@ -334,7 +334,7 @@ void example(void)
 
 ### Examples
 
-```
+```c
 /* Example using a structure */
 
 #include "vampire/saga_audio.h"
@@ -381,7 +381,7 @@ INTREQ2   | 29C  |  W  | Interrupt request bits (Bit00 to Bit03, for AUD4 to AUD
 
 ### Examples
 
-```
+```c
 /* vampire/saga_audio.h */
 
 #define DMA2B_SETCLR         (15)
@@ -400,7 +400,7 @@ INTREQ2   | 29C  |  W  | Interrupt request bits (Bit00 to Bit03, for AUD4 to AUD
 
 ### Examples
 
-```
+```c
 /* vampire/saga_audio.h */
 
 #define INT2B_SETCLR         (15)
@@ -418,7 +418,7 @@ INTREQ2   | 29C  |  W  | Interrupt request bits (Bit00 to Bit03, for AUD4 to AUD
 
 ### Examples
 
-```
+```c
 #include "vampire/saga_audio.h"
 
 #define CLR16(a, b) *(volatile UWORD*) (a) = (UWORD) (0x0000 + (b))
