@@ -1,13 +1,13 @@
-#ifndef	VAMPIRE_CUSTOM2_H
-#define	VAMPIRE_CUSTOM2_H
+#ifndef VAMPIRE_CUSTOM2_H
+#define VAMPIRE_CUSTOM2_H
 /*
-**	$VER: custom2.h 0.1 (15.11.2020)
-**	Vampire software development kit
-**	
-**	Offsets of Amiga custom chip registers
-**	
-**	(C) Copyright 2015-2020 APOLLO-Team
-**	    All Right Reserved
+**  $VER: custom2.h 0.1 (15.11.2020)
+**  Vampire software development kit
+**  
+**  Offsets of Amiga custom chip registers
+**  
+**  (C) Copyright 2015-2020 APOLLO-Team
+**      All Right Reserved
 */
 
 #ifndef EXEC_TYPES_H
@@ -18,7 +18,7 @@
 
 /*
  * do this to get base of custom registers:
- * extern struct Custom2 custom;
+ * extern struct Custom2 custom2;
  */
 
 
@@ -67,7 +67,7 @@ struct Custom2
     UBYTE   pad2d;           /*                                                 */
     UBYTE   bltcon0l;        /* low 8 bits of bltcon0, write only               */
     UWORD   bltsizv;         /*                                                 */
-    UWORD   bltsizh;	     /* 5e                                              */
+    UWORD   bltsizh;         /* 5e                                              */
     UWORD   bltcmod;         /*                                                 */
     UWORD   bltbmod;         /*                                                 */
     UWORD   bltamod;         /*                                                 */
@@ -96,7 +96,7 @@ struct Custom2
     UWORD   intreq;          /*                                                 */
     UWORD   adkcon;          /*                                                 */
     struct  AudChannel       /*                                                 */
-	{                        /*                                                 */
+    {                        /*                                                 */
       UWORD *ac_ptr;         /*                                                 */
       UWORD ac_len;          /*                                                 */
       UWORD ac_per;          /*                                                 */
@@ -116,7 +116,7 @@ struct Custom2
     UWORD   bpldat[8];       /*                                                 */
     APTR    sprpt[8];        /*                                                 */
     struct  SpriteDef        /*                                                 */
-	{                        /*                                                 */
+    {                        /*                                                 */
       UWORD pos;             /*                                                 */
       UWORD ctl;             /*                                                 */
       UWORD dataa;           /*                                                 */
@@ -154,41 +154,43 @@ struct Custom2
 #ifdef ECS_SPECIFIC
 
 /* defines for beamcon register */
-#define VARVBLANK	0x1000	/* Variable vertical blank enable */
-#define LOLDIS		0x0800	/* long line disable */
-#define CSCBLANKEN	0x0400	/* redirect composite sync */
-#define VARVSYNC	0x0200	/* Variable vertical sync enable */
-#define VARHSYNC	0x0100	/* Variable horizontal sync enable */
-#define VARBEAM	0x0080	/* variable beam counter enable */
-#define DISPLAYDUAL	0x0040	/* use UHRES pointer and standard pointers */
-#define DISPLAYPAL	0x0020	/* set decodes to generate PAL display */
-#define VARCSYNC	0x0010	/* Variable composite sync enable */
-#define CSBLANK	0x0008	/* Composite blank out to CSY* pin */
-#define CSYNCTRUE	0x0004	/* composite sync true signal */
-#define VSYNCTRUE	0x0002	/* vertical sync true */
-#define HSYNCTRUE	0x0001	/* horizontal sync true */
+#define VARVBLANK            0x1000    /* Variable vertical blank enable */
+#define LOLDIS               0x0800    /* long line disable */
+#define CSCBLANKEN           0x0400    /* redirect composite sync */
+#define VARVSYNC             0x0200    /* Variable vertical sync enable */
+#define VARHSYNC             0x0100    /* Variable horizontal sync enable */
+#define VARBEAM              0x0080    /* variable beam counter enable */
+#define DISPLAYDUAL          0x0040    /* use UHRES pointer and standard pointers */
+#define DISPLAYPAL           0x0020    /* set decodes to generate PAL display */
+#define VARCSYNC             0x0010    /* Variable composite sync enable */
+#define CSBLANK              0x0008    /* Composite blank out to CSY* pin */
+#define CSYNCTRUE            0x0004    /* composite sync true signal */
+#define VSYNCTRUE            0x0002    /* vertical sync true */
+#define HSYNCTRUE            0x0001    /* horizontal sync true */
 
 /* new defines for bplcon0 */
-#define USE_BPLCON3	1
+#define USE_BPLCON3          1
 
 /* new defines for bplcon2 */
-#define BPLCON2_ZDCTEN		(1<<10) /* colormapped genlock bit */
-#define BPLCON2_ZDBPEN		(1<<11) /* use bitplane as genlock bits */
-#define BPLCON2_ZDBPSEL0	(1<<12) /* three bits to select one */
-#define BPLCON2_ZDBPSEL1	(1<<13) /* of 8 bitplanes in */
-#define BPLCON2_ZDBPSEL2	(1<<14) /* ZDBPEN genlock mode */
+#define BPLCON2_ZDCTEN       (1<<10)   /* colormapped genlock bit */
+#define BPLCON2_ZDBPEN       (1<<11)   /* use bitplane as genlock bits */
+#define BPLCON2_ZDBPSEL0     (1<<12)   /* three bits to select one */
+#define BPLCON2_ZDBPSEL1     (1<<13)   /* of 8 bitplanes in */
+#define BPLCON2_ZDBPSEL2     (1<<14)   /* ZDBPEN genlock mode */
 
 /* defines for bplcon3 register */
-#define BPLCON3_EXTBLNKEN	(1<<0)	/* external blank enable */
-#define BPLCON3_EXTBLKZD	(1<<1)	/* external blank ored into trnsprncy */
-#define BPLCON3_ZDCLKEN	(1<<2)	/* zd pin outputs a 14mhz clock*/
-#define BPLCON3_BRDNTRAN	(1<<4)	/* border is opaque */
-#define BPLCON3_BRDNBLNK	(1<<5)	/* border is opaque */
+#define BPLCON3_EXTBLNKEN    (1<<0)    /* external blank enable */
+#define BPLCON3_EXTBLKZD     (1<<1)    /* external blank ored into trnsprncy */
+#define BPLCON3_ZDCLKEN      (1<<2)    /* zd pin outputs a 14mhz clock*/
+#define BPLCON3_BRDNTRAN     (1<<4)    /* border is opaque */
+#define BPLCON3_BRDNBLNK     (1<<5)    /* border is opaque */
 
-#endif	/* ECS_SPECIFIC */
+#endif  /* ECS_SPECIFIC */
 
 #ifdef VAMPIRE_SPECIFIC
 
-#endif	/* VAMPIRE_SPECIFIC */
+/* TODO */
 
-#endif	/* VAMPIRE_CUSTOM2_H */
+#endif  /* VAMPIRE_SPECIFIC */
+
+#endif  /* VAMPIRE_CUSTOM2_H */
