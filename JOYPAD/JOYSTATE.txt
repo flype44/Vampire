@@ -1,13 +1,13 @@
 JOYSTATE
 
         This 16-bit Read-Only Register reads the V4+ USB Joypads state.
-		It contains bits state for plug/unplug, directions and buttons.
-		
-		DFF220	joy0state
-		DFF222	joy1state
-		DFF224	joy2state
-		DFF226	joy3state
-		
+	It contains bits state for plug/unplug, directions and buttons.
+	
+		DFF220	(R) joy0state (supported)
+		DFF222	(R) joy1state (supported)
+		DFF224	(R) joy2state (reserved for future)
+		DFF226	(R) joy3state (reserved for future)
+	
         +-------+----------+-------------------------------------------+
         | BIT#  | FUNCTION | DESCRIPTION                               |
         +-------+----------+-------------------------------------------+
