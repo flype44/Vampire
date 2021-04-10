@@ -28,6 +28,8 @@ The `SAGA` chipset provides additional registers to read the dedicated Vampire U
 
 It is only available on the `Vampire` **standalone** cards, contrary to the `Vampire` **accelerators** cards.
 
+![Vampire JOYPAD](JOYPAD.png)
+
 ### Registers
 
 This 16-bit Read-Only Register reads the V4+ USB Joypads state.
