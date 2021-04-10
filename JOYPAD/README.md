@@ -28,22 +28,24 @@ The `SAGA` chipset provides additional registers to read the dedicated Vampire U
 
 It is only available on the `Vampire` **standalone** cards, contrary to the `Vampire` **accelerators** cards.
 
+# Illustration
+
 ![Vampire JOYPAD](JOYPAD.png)
 
-### Registers
+# Registers
 
 This 16-bit Read-Only Register reads the V4+ USB Joypads state.
 
 It contains bits state for plug/unplug, directions and buttons.
 
-NAME      | ADDR | R/W | FUNCTION
---------- | ---- | --- | --------
-JOYP1     | 220  |  R  | Joypad Number 1 State
-JOYP2     | 222  |  R  | Joypad Number 2 State
-JOYP3     | 224  |  R  | Joypad Number 3 State
-JOYP4     | 226  |  R  | Joypad Number 4 State
+NAME      | ADDRESS | R/W | FUNCTION
+--------- | ------- | --- | --------
+JOYP1     | DFF220  |  R  | Joypad Number 1 State
+JOYP2     | DFF222  |  R  | Joypad Number 2 State
+JOYP3     | DFF224  |  R  | Joypad Number 3 State
+JOYP4     | DFF226  |  R  | Joypad Number 4 State
 
-### Description
+# Description
 
 ```c
 #define VREG_JOYP1      0xdff220 // (R) (16-bit)
