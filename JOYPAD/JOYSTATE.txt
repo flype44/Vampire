@@ -1,30 +1,30 @@
 JOYSTATE
 
         This 16-bit Read-Only Register reads the V4+ USB Joypads state.
-		It contains bits state for plug/unplug, directions and buttons.
-		
-		DFF220	joy0state
-		DFF222	joy1state
-		DFF224	joy2state
-		DFF226	joy3state
-		
-        +-------+----------+-------------------------------------------+
-        | BIT#  | FUNCTION | DESCRIPTION                               |
-        +-------+----------+-------------------------------------------+
-        | 15    | RIGHT    | Direction Right                           |
-        | 14    | LEFT     | Direction Left                            |
-        | 13    | DOWN     | Direction Down                            |
-        | 12    | UP       | Direction Up                              |
-        | 11    | RESERVED | Reserved                                  |
-        | 10    | START    | Start Button                              |
-        | 09    | BACK     | Back Button                               |
-        | 08    | FIRE8    | Fire Button 8                             |
-        | 07    | FIRE7    | Fire Button 7                             |
-        | 06    | FIRE6    | Fire Button 6                             |
-        | 05    | FIRE5    | Fire Button 5                             |
-        | 04    | FIRE4    | Fire Button 4                             |
-        | 03    | FIRE3    | Fire Button 3                             |
-        | 02    | FIRE2    | Fire Button 2                             |
-        | 01    | FIRE1    | Fire Button 1                             |
-        | 00    | PLUG     | Joypad connected                          |
-        +-------+----------+-------------------------------------------+
+	It contains bits state for plug/unplug, directions and buttons.
+	
+	DFF220	(R) joy0state (supported)
+	DFF222	(R) joy1state (supported)
+	DFF224	(R) joy2state (reserved for future)
+	DFF226	(R) joy3state (reserved for future)
+	
+        +------+----------+-------------------------------------------+
+        | BIT# | FUNCTION | DESCRIPTION                               |
+        +------+----------+-------------------------------------------+
+        | 15   | RIGHT    | Direction Right                           |
+        | 14   | LEFT     | Direction Left                            |
+        | 13   | DOWN     | Direction Down                            |
+        | 12   | UP       | Direction Up                              |
+        | 11   | RESERVED | Reserved                                  |
+        | 10   | START    | Start Button                              |
+        | 09   | BACK     | Back Button                               |
+        | 08   | FIRE8    | Fire Button 8                             |
+        | 07   | FIRE7    | Fire Button 7                             |
+        | 06   | FIRE6    | Fire Button 6                             |
+        | 05   | FIRE5    | Fire Button 5                             |
+        | 04   | FIRE4    | Fire Button 4                             |
+        | 03   | FIRE3    | Fire Button 3                             |
+        | 02   | FIRE2    | Fire Button 2                             |
+        | 01   | FIRE1    | Fire Button 1                             |
+        | 00   | PLUG     | Joypad connected                          |
+        +------+----------+-------------------------------------------+
