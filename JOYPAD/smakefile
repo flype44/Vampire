@@ -1,0 +1,12 @@
+
+OBJS = 
+
+all: VControl
+
+VControl: ControllerTest.c 
+	sc link ControllerTest.c $(OBJS)
+
+clean:
+	rm -fr ControllerTest
+	rm -fr ControllerTest.o
+	rm -fr ControllerTest.lnk
