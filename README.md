@@ -37,3 +37,5 @@ Below are detailed (WIP) articles, per chip component.
 * [Vampire SAGA FLASH chipset](FLASH)
 
 * [Vampire SAGA SDCARD chipset](SDCARD)
+
+* [Vampire SAGA JOYPAD chipset](JOYPAD)
