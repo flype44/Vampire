@@ -13,6 +13,10 @@
 #include <dos/dos.h>
 #include <stdio.h>
 #include <string.h>
+
+#include <proto/dos.h>
+#include <proto/exec.h>
+
 #include "nemo.h"
 
 /*****************************************************************
@@ -30,13 +34,17 @@
 
 const unsigned char ver[] = APP_VSTRING;
 
-struct ExecBase *SysBase;
+//struct ExecBase *SysBase;
+
+extern struct ExecBase *SysBase;
+extern struct DOSBase  *DOSBase;
+extern struct GfxBase  *GfxBase;
 
 const char *bits[16] = {
-	[0x0]="0000", [0x1]="0001", [0x2]="0010", [0x3]="0011",
-	[0x4]="0100", [0x5]="0101", [0x6]="0110", [0x7]="0111",
-	[0x8]="1000", [0x9]="1001", [0xa]="1010", [0xb]="1011",
-	[0xc]="1100", [0xd]="1101", [0xe]="1110", [0xf]="1111"
+	"0000", "0001", "0010", "0011",
+	"0100", "0101", "0110", "0111",
+	"1000", "1001", "1010", "1011",
+	"1100", "1101", "1110", "1111"
 };
 
 void printbin( unsigned short n )
@@ -76,7 +84,7 @@ int main(int argc, char *argv[])
 			// 'Mnemonic' to 'ASM file'
 			
 			FPuts( file, "MAIN:\n\t" );
-			FPuts( file, opts[ OPT_MNEMONIC ] );
+			FPuts( file, (char *)opts[ OPT_MNEMONIC ] );
 			Close( file );
 			
 			// Call VASM
@@ -140,7 +148,7 @@ int main(int argc, char *argv[])
 		PrintFault( IoErr(), "Nemo" );
 	}
 	
-	exit( rc );
+	//exit( rc );
 }
 
 
