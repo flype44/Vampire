@@ -88,7 +88,8 @@
 #define OPT_MNEMONIC  0
 #define OPT_COUNT     1
 
-const UBYTE version[] = APP_VSTRING;
+UBYTE appName[] = APP_NAME;
+UBYTE appVers[] = APP_VSTRING;
 
 /*****************************************************************
  * 
@@ -207,45 +208,46 @@ ULONG main(ULONG argc, STRPTR argv[])
 				{
 					struct FileInfoBlock fib;
 					
-					if (ExamineFH(file, &fib))
+					if (ExamineFH(file, &fib) && fib.fib_Size >= sizeof(UWORD))
 					{
-						if (fib.fib_Size >= sizeof(UWORD))
-						{
-							LONG i;
-							
-							VPrintf("\n\t; %s\n", &opts[OPT_MNEMONIC]);
-							
-							for (i = 0; i < fib.fib_Size; i += sizeof(UWORD))
-							{
-								UWORD buffer[32];
-								
-								if (Read(file, buffer, sizeof(UWORD)))
-								{
-									PrintHex(*buffer);
-									PrintBin(*buffer);
-								}
-							}
-							
-							PutStr("\n");
+						LONG i;
 						
-							rc = RETURN_OK;
+						VPrintf("\n\t; %s\n", &opts[OPT_MNEMONIC]);
+						
+						for (i = 0; i < fib.fib_Size; i += sizeof(UWORD))
+						{
+							UWORD buffer[32];
+							
+							if (Read(file, buffer, sizeof(UWORD)))
+							{
+								PrintHex(*buffer);
+								PrintBin(*buffer);
+							}
 						}
+						
+						PutStr("\n");
+					
+						rc = RETURN_OK;
 					}
 					
 					Close(file);
+				}
+				else
+				{
+					PrintFault(IoErr(), appName);
 				}
 			}
 		}
 		else
 		{
-			PrintFault(IoErr(), "Nemo");
+			PrintFault(IoErr(), appName);
 		}
 		
 		FreeArgs(rdargs);
 	}
 	else
 	{
-		PrintFault(IoErr(), "Nemo");
+		PrintFault(IoErr(), appName);
 	}
 	
 	return(rc);
