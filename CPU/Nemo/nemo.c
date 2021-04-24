@@ -12,18 +12,18 @@
  * 
  * nemo move.l (a1,d1.L*4),(a2,d2.W*2);
  * 
- *      DC.W $25b1 ; 0010 0101 1011 0001
- *      DC.W $1c00 ; 0001 1100 0000 0000
+ *      DC.W $25B1 ; 0010 0101 1011 0001
+ *      DC.W $1C00 ; 0001 1100 0000 0000
  *      DC.W $2200 ; 0010 0010 0000 0000
  * 
  * nemo paddusb d1,e0,e1;
  * 
- *      DC.W $fe01 ; 1111 1110 0000 0001
+ *      DC.W $FE01 ; 1111 1110 0000 0001
  *      DC.W $8914 ; 1000 1001 0001 0100
  * 
  * nemo paddusw d1,e0,e1;
  * 
- *      DC.W $fe01 ; 1111 1110 0000 0001
+ *      DC.W $FE01 ; 1111 1110 0000 0001
  *      DC.W $8915 ; 1000 1001 0001 0101
  * 
  *****************************************************************/
@@ -32,9 +32,6 @@
 #include <exec/memory.h>
 #include <exec/execbase.h>
 #include <dos/dos.h>
-#include <stdio.h>
-#include <string.h>
-
 #include <proto/dos.h>
 #include <proto/exec.h>
 
@@ -56,7 +53,7 @@
 #define OPT_MNEMONIC    0
 #define OPT_COUNT       1
 
-const UBYTE ver[] = APP_VSTRING;
+const UBYTE version[] = APP_VSTRING;
 
 /*****************************************************************
  * 
@@ -74,7 +71,8 @@ extern struct GfxBase  *GfxBase;
  * 
  *****************************************************************/
 
-const BYTE *bits[16] = {
+const STRPTR nibble[ 16 ] = 
+{
 	"0000", "0001", "0010", "0011",
 	"0100", "0101", "0110", "0111",
 	"1000", "1001", "1010", "1011",
@@ -83,12 +81,14 @@ const BYTE *bits[16] = {
 
 VOID PrintBin( UWORD n )
 {
-	printf( "%s %s %s %s\n",
-		bits[ n >> 12 & 0xf ],
-		bits[ n >>  8 & 0xf ],
-		bits[ n >>  4 & 0xf ],
-		bits[ n >>  0 & 0xf ]
-	);
+	STRPTR argv[ 4 ];
+	
+	argv[ 0 ] = nibble[ ( n >> 12 ) & 0xf ];
+	argv[ 1 ] = nibble[ ( n >>  8 ) & 0xf ];
+	argv[ 2 ] = nibble[ ( n >>  4 ) & 0xf ];
+	argv[ 3 ] = nibble[ ( n >>  0 ) & 0xf ];
+	
+	VPrintf("%s %s %s %s\n", argv);
 }
 
 /*****************************************************************
@@ -99,7 +99,28 @@ VOID PrintBin( UWORD n )
 
 VOID PrintHex( UWORD n )
 {
-	printf( "\tDC.W $%04x ; ", n);
+	UWORD argv[ 1 ];
+	
+	argv[ 0 ] = n;
+	
+	VPrintf("\tDC.W $%04x ; ", argv);
+}
+
+/*****************************************************************
+ * 
+ * VOID VSPrintf( STRPTR str, STRPTR fmt, APTR args )
+ * 
+ *****************************************************************/
+
+VOID VSPrintf( STRPTR str, STRPTR fmt, APTR args )
+{
+	const UWORD PutChProc[] =
+	{ 
+		0x16C0, // move.b d0,(a3)+
+		0x4E75  // rts
+	};
+	
+	RawDoFmt(fmt, args, (VOID (*)(VOID))&PutChProc, str);
 }
 
 /*****************************************************************
@@ -116,9 +137,10 @@ ULONG main(ULONG argc, STRPTR argv[])
 	struct FileInfoBlock fib;
 	LONG   opts[ OPT_COUNT ];  
 	BYTE   commandString[ 255 ];
+	STRPTR commandArgs[] = { FILE_ASM, FILE_BIN, FILE_OUT };
 	USHORT buffer[ 32 ];
 	
-	memset((STRPTR)opts, 0, sizeof(opts));
+	opts[ 0 ] = NULL;
 	
 	if ( rdargs = (struct RDArgs *)ReadArgs(TEMPLATE, opts, NULL) )
 	{
@@ -134,12 +156,7 @@ ULONG main(ULONG argc, STRPTR argv[])
 			
 			// Prepare command line string
 			
-			sprintf( commandString, 
-				FILE_CMD,
-				FILE_ASM,
-				FILE_BIN,
-				FILE_OUT
-			);
+			VSPrintf( commandString, FILE_CMD, commandArgs );
 			
 			// Delete old generated file
 			
@@ -157,7 +174,7 @@ ULONG main(ULONG argc, STRPTR argv[])
 					{
 						ULONG i;
 						
-						printf( "\n\t; %s\n", opts[ OPT_MNEMONIC ] );
+						VPrintf( "\n\t; %s\n", &opts[ OPT_MNEMONIC ] );
 						
 						for( i = 0; i < fib.fib_Size; i += 2 )
 						{
@@ -168,7 +185,7 @@ ULONG main(ULONG argc, STRPTR argv[])
 							}
 						}
 						
-						printf( "\n" );
+						PutStr( "\n" );
 						
 						rc = RETURN_OK;
 					}
@@ -177,12 +194,12 @@ ULONG main(ULONG argc, STRPTR argv[])
 				}
 				else
 				{
-					printf( "Syntax error.\n" );
+					PutStr( "Syntax error.\n" );
 				}
 			}
 			else
 			{
-				printf( "Required: vasmm68k_mot_os3\n" );
+				PutStr( "Required: vasmm68k_mot_os3\n" );
 			}
 		}
 		else
