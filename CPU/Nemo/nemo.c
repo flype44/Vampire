@@ -12,10 +12,10 @@
  * This program use the VASM assembler by Frank Wille to get a 
  * quick view of the byte encoding of any supported Motorola 68000 
  * processor instruction, by typing an assembly instruction in CLI.
- * In short words, the program takes user input, create a temporary
- * assembly file, assemble it with VASM using -Fbin option, then 
- * read back the encoded bytes, and output hexa/binary reusable
- * assembly code.
+ * In short words, the program takes the user input, create a 
+ * temporary assembly file, assemble it with VASM using the -Fbin 
+ * option, then read back the encoded bytes, and output reusable 
+ * DC.w hexadecimal/binary assembly code.
  * 
  * Download VASM for Motorola 68K AmigaOS3, and place it in any
  * accessible path, for example in the C: folder.
@@ -88,8 +88,8 @@
 #define OPT_MNEMONIC  0
 #define OPT_COUNT     1
 
-UBYTE appName[] = APP_NAME;
-UBYTE appVers[] = APP_VSTRING;
+STRPTR appName = APP_NAME;
+STRPTR appVers = APP_VSTRING;
 
 /*****************************************************************
  * 
@@ -186,46 +186,35 @@ ULONG main(ULONG argc, STRPTR argv[])
 				FILE_OUT
 			};
 			
-			// 'Mnemonic' to 'ASM file'
-			
 			FPuts(file, "MAIN:\n\t");
 			FPuts(file, (STRPTR)opts[OPT_MNEMONIC]);
 			Close(file);
-			
-			// Delete old generated file
-			
-			DeleteFile(FILE_OUT);
-			
-			// Call VASM
 			
 			VSPrintf(commandString, FILE_CMD, commandArgs);
 			
 			if (Execute(commandString, NULL, NULL))
 			{
-				// Open new generated file
-				
 				if (file = Open(FILE_OUT, MODE_OLDFILE))
 				{
-					struct FileInfoBlock fib;
+					UWORD opcode;
 					
-					if (ExamineFH(file, &fib) && fib.fib_Size >= sizeof(UWORD))
+					VPrintf("\n\t; %s\n", &opts[OPT_MNEMONIC]);
+					
+					while (Read(file, &opcode, sizeof(UWORD)) > 0)
 					{
-						UWORD opcode;
-						
-						VPrintf("\n\t; %s\n", &opts[OPT_MNEMONIC]);
-						
-						while (Read(file, &opcode, sizeof(UWORD)) > 0)
-						{
-							PrintHex(opcode);
-							PrintBin(opcode);
-						}
-						
-						rc = RETURN_OK;
+						PrintHex(opcode);
+						PrintBin(opcode);
 					}
 					
+					rc = RETURN_OK;
+					
 					Close(file);
+					
+					DeleteFile(FILE_OUT);
 				}
 			}
+			
+			DeleteFile(FILE_ASM);
 		}
 		else
 		{
