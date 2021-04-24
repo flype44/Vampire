@@ -1,9 +1,30 @@
 /*****************************************************************
  * 
- * Project: Nemo
- * Version: 0.2
- * Author:  flype
- * Short:   68K/AMMX Mnemonic encoder
+ * Project  : Nemo
+ * Version  : 0.3
+ * Author   : flype
+ * Short    : M68K/AMMX Mnemonic encoder
+ * Usage    : nemo <any valid assembly instruction>
+ * 
+ *****************************************************************
+ * 
+ * Examples :
+ * 
+ * nemo move.l (a1,d1.L*4),(a2,d2.W*2);
+ * 
+ *      DC.W $25b1 ; 0010 0101 1011 0001
+ *      DC.W $1c00 ; 0001 1100 0000 0000
+ *      DC.W $2200 ; 0010 0010 0000 0000
+ * 
+ * nemo paddusb d1,e0,e1;
+ * 
+ *      DC.W $fe01 ; 1111 1110 0000 0001
+ *      DC.W $8914 ; 1000 1001 0001 0100
+ * 
+ * nemo paddusw d1,e0,e1;
+ * 
+ *      DC.W $fe01 ; 1111 1110 0000 0001
+ *      DC.W $8915 ; 1000 1001 0001 0101
  * 
  *****************************************************************/
 
@@ -20,34 +41,47 @@
 #include "nemo.h"
 
 /*****************************************************************
+ * 
  * DEFINES
+ * 
  *****************************************************************/
 
 #define TEMPLATE  "MNEMONIC/A/F"
+
 #define FILE_ASM  "T:NEMO.ASM"
 #define FILE_BIN  "T:NEMO.BIN"
-#define FILE_LOG  "T:NEMO.LOG"
+#define FILE_OUT  "T:NEMO.OUT"
 #define FILE_CMD  "vasmm68k_mot_os3 -no-opt -Fbin -m68080 %s -o %s -quiet >%s"
 
 #define OPT_MNEMONIC    0
 #define OPT_COUNT       1
 
-const unsigned char ver[] = APP_VSTRING;
+const UBYTE ver[] = APP_VSTRING;
 
-//struct ExecBase *SysBase;
+/*****************************************************************
+ * 
+ * EXTERNS
+ * 
+ *****************************************************************/
 
 extern struct ExecBase *SysBase;
 extern struct DOSBase  *DOSBase;
 extern struct GfxBase  *GfxBase;
 
-const char *bits[16] = {
+/*****************************************************************
+ * 
+ * VOID PrintBin( UWORD n )
+ * 
+ *****************************************************************/
+
+const BYTE *bits[16] = {
 	"0000", "0001", "0010", "0011",
 	"0100", "0101", "0110", "0111",
 	"1000", "1001", "1010", "1011",
 	"1100", "1101", "1110", "1111"
 };
 
-void printbin( unsigned short n )
+VOID PrintBin( UWORD n )
 {
 	printf( "%s %s %s %s\n",
 		bits[ n >> 12 & 0xf ],
@@ -58,68 +92,85 @@ void printbin( unsigned short n )
 }
 
 /*****************************************************************
- * ENTRY POINT
+ * 
+ * VOID PrintHex( UWORD n )
+ * 
  *****************************************************************/
 
-int main(int argc, char *argv[])
+VOID PrintHex( UWORD n )
 {
-	int rc = FALSE;
+	printf( "\tDC.W $%04x ; ", n);
+}
+
+/*****************************************************************
+ *
+ * ULONG main(ULONG argc, STRPTR argv[])
+ *
+ *****************************************************************/
+
+ULONG main(ULONG argc, STRPTR argv[])
+{
+	ULONG rc = RETURN_WARN;
 	
 	struct RDArgs *rdargs;   
 	struct FileInfoBlock fib;
-	long opts[OPT_COUNT];  
-	char commandString[255];
-	unsigned short buffer[32];
+	LONG   opts[ OPT_COUNT ];  
+	BYTE   commandString[ 255 ];
+	USHORT buffer[ 32 ];
 	
-	memset((char *)opts, 0, sizeof(opts));
+	memset((STRPTR)opts, 0, sizeof(opts));
 	
 	if ( rdargs = (struct RDArgs *)ReadArgs(TEMPLATE, opts, NULL) )
 	{
 		BPTR file;
 		
-		file = Open( FILE_ASM, MODE_NEWFILE );
-		
-		if( file != 0 )
+		if( file = Open( FILE_ASM, MODE_NEWFILE ) )
 		{
 			// 'Mnemonic' to 'ASM file'
 			
 			FPuts( file, "MAIN:\n\t" );
-			FPuts( file, (char *)opts[ OPT_MNEMONIC ] );
+			FPuts( file, (STRPTR)opts[ OPT_MNEMONIC ] );
 			Close( file );
 			
-			// Call VASM
+			// Prepare command line string
 			
 			sprintf( commandString, 
 				FILE_CMD,
 				FILE_ASM,
 				FILE_BIN,
-				FILE_LOG
+				FILE_OUT
 			);
+			
+			// Delete old generated file
 			
 			DeleteFile( FILE_BIN );
 			
+			// Call VASM
+			
 			if( Execute( commandString, NULL, NULL ) )
 			{
-				file = Open( FILE_BIN, MODE_OLDFILE );
+				// Open new generated file
 				
-				if( file != 0 )
+				if( file = Open( FILE_BIN, MODE_OLDFILE ) )
 				{
 					if( ExamineFH( file, &fib ) )
 					{
-						int i;
+						ULONG i;
 						
 						printf( "\n\t; %s\n", opts[ OPT_MNEMONIC ] );
 						
-						for( i = 0; i < fib.fib_Size; i+=2 )
+						for( i = 0; i < fib.fib_Size; i += 2 )
 						{
 							if( Read( file, buffer, 2 ) )
 							{
-								printf( "\tDC.W $%04x ; ", buffer[0]);
-								printbin( buffer[0] );
+								PrintHex( buffer[ 0 ] );
+								PrintBin( buffer[ 0 ] );
 							}
 						}
 						
 						printf( "\n" );
+						
+						rc = RETURN_OK;
 					}
 					
 					Close( file );
@@ -138,9 +189,7 @@ int main(int argc, char *argv[])
 		{
 			PrintFault( IoErr(), "Nemo" );
 		}
-			
-		rc = TRUE;
-
+		
 		FreeArgs(rdargs);
 	}
 	else
@@ -148,10 +197,12 @@ int main(int argc, char *argv[])
 		PrintFault( IoErr(), "Nemo" );
 	}
 	
-	//exit( rc );
+	return( rc );
 }
 
 
 /*****************************************************************
+ * 
  * END
+ * 
  *****************************************************************/
