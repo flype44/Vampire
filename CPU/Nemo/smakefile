@@ -3,26 +3,14 @@
 # SAS/C Makefile for "Nemo"
 # for AmigaOS3.X M68K SAS/C 6.59 Compiler
 # 
-# (C) Copyright 2016-2020 APOLLO-Team
-# 
 #################################################
 
 OBJECTS = nemo.o
 
-AS=vasmm68k_mot
-ASMFLAGS=-Fhunk -devpac -m68000 -quiet
-ASMINCLUDES=-Isc:include/
-OUTFILE=Nemo
-BUILDDEPS=
-CFLAGS=
-
-all: $(OUTFILE)
+all: nemo
 
 clean:
-        @delete $(OBJECTS)
+	@delete $(OBJECTS)
 
-.asm.o: $(BUILDDEPS)
-        $(AS) $(ASMFLAGS) $(ASMINCLUDES) -o $@ $*.asm
-
-Nemo: $(OBJECTS)
+nemo: $(OBJECTS)
 	sc NOICONS link $(OBJECTS)
