@@ -11,7 +11,7 @@
  * 
  * This program use the VASM assembler by Frank Wille to get a 
  * quick view of the byte encoding of any supported Motorola 68000 
- * processor, by typing an assembly instruction from CLI shell.
+ * processor instruction, by typing an assembly instruction in CLI.
  * In short words, the program takes user input, create a temporary
  * assembly file, assemble it with VASM using -Fbin option, then 
  * read back the encoded bytes, and output hexa/binary reusable
@@ -78,12 +78,12 @@
  * 
  *****************************************************************/
 
-#define TEMPLATE  "MNEMONIC/A/F"
-
 #define FILE_ASM  "T:NEMO.ASM"
 #define FILE_OUT  "T:NEMO.OUT"
 #define FILE_EXE  "vasmm68k_mot_os3"
 #define FILE_CMD  "%s -no-opt -Fbin -m68080 -m68882 %s -o %s -quiet"
+
+#define TEMPLATE  "MNEMONIC/A/F"
 
 #define OPT_MNEMONIC  0
 #define OPT_COUNT     1
@@ -210,31 +210,20 @@ ULONG main(ULONG argc, STRPTR argv[])
 					
 					if (ExamineFH(file, &fib) && fib.fib_Size >= sizeof(UWORD))
 					{
-						LONG i;
+						UWORD opcode;
 						
 						VPrintf("\n\t; %s\n", &opts[OPT_MNEMONIC]);
 						
-						for (i = 0; i < fib.fib_Size; i += sizeof(UWORD))
+						while (Read(file, &opcode, sizeof(UWORD)) > 0)
 						{
-							UWORD buffer[32];
-							
-							if (Read(file, buffer, sizeof(UWORD)))
-							{
-								PrintHex(*buffer);
-								PrintBin(*buffer);
-							}
+							PrintHex(opcode);
+							PrintBin(opcode);
 						}
 						
-						PutStr("\n");
-					
 						rc = RETURN_OK;
 					}
 					
 					Close(file);
-				}
-				else
-				{
-					PrintFault(IoErr(), appName);
 				}
 			}
 		}
