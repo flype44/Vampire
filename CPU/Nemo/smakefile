@@ -13,4 +13,4 @@ clean:
 	@delete $(OBJECTS)
 
 nemo: $(OBJECTS)
-	sc NOICONS link $(OBJECTS)
+	sc NOICONS LINK $(OBJECTS)
