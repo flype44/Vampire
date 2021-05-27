@@ -1,0 +1,9 @@
+all: OpenPiPWindow.o
+
+clean:
+   Delete OpenPiPWindow
+   Delete OpenPiPWindow.o
+   Delete OpenPiPWindow.lnk
+
+.c.o:
+   SC $*.c LINK NOSTACKCHECK PROGRAMNAME $*

@@ -1,0 +1,5 @@
+##base _CardBase
+##bias 30
+FindCard(boardinfo)(A0)
+InitCard(boardinfo, toolTypes)(A0/A1)
+##end

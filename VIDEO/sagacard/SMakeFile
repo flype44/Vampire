@@ -1,0 +1,108 @@
+###########################################################
+#
+# SAS/C Makefile for "SAGA.card"
+# for AmigaOS3.X SAS/C 6.59 Compiler
+# 
+###########################################################
+
+OUTFILE=SAGA.card
+INSTALLPATH=LIBS:Picasso96
+
+###########################################################
+# OBJECTS
+###########################################################
+
+OBJECTS=\
+KPrintf.o \
+SAGACard.o \
+SAGACard_LibHeader.o \
+SAGACard_LibInit.o \
+SAGACard_FindCard.o \
+SAGACard_InitCard.o \
+SAGACard_Settings.o \
+SAGACard_BitMap.o \
+SAGACard_CardMem.o \
+SAGACard_Drawing.o \
+SAGACard_Sprite.o \
+SAGACard_Support.o \
+SAGACard_Special.o \
+SAGACard_MemoryWindow.o \
+SAGACard_VideoWindow.o \
+SAGACard_VideoCapture.o \
+SAGACard_FlickerFixer.o 
+
+###########################################################
+# LINKLIBS
+###########################################################
+
+LINKLIBS=sc:lib/sc.lib
+
+###########################################################
+# ASSEMBLER
+###########################################################
+
+AS=vasmm68k_mot_os3
+ASMFLAGS=-Fhunk -devpac -m68020 -quiet
+ASMINCLUDES=-Isc:include/
+
+###########################################################
+# COMPILER
+###########################################################
+
+LIBFD=SAGACard.fd
+CFLAGS=CPU=68020
+BUILDDEPS=SAGACard.h
+
+###########################################################
+# SMAKE
+###########################################################
+
+all: $(OUTFILE)
+
+clean:
+    @delete $(OBJECTS) $(OUTFILE)
+    @echo "*e[32mCLEANED. *e[0m"
+
+install: $(OUTFILE)
+    @slink $(OUTFILE) TO $(INSTALLPATH)/$(OUTFILE) STRIPDEBUG NOICONS
+    @echo "*e[32mINSTALLED. *e[0m"
+
+.c.o:
+    @echo "*e[32mCOMPILING... *e[0m"
+    sc $< $(CFLAGS)
+    @echo "*e[32mCOMPILED. *e[0m"
+
+.asm.o: $(BUILDDEPS)
+    @echo "*e[32mASSEMBLING... *e[0m"
+    $(AS) $(ASMFLAGS) $(ASMINCLUDES) -o $@ $*.asm
+    @echo "*e[32mASSEMBLED. *e[0m"
+
+SAGA.card: $(OBJECTS)
+    @echo "*e[32mLINKING... *e[0m"
+    slink FROM $(OBJECTS) LIB $(LINKLIBS) TO $(OUTFILE) SC SD ND NOICONS QUIET
+    @echo "*e[32mLINKED. ALL DONE. *e[0m"
+
+###########################################################
+# BUILD OBJECTS
+###########################################################
+
+SAGACard.o:              SAGACard.c              SAGACard.h
+SAGACard_LibHeader.o:    SAGACard_Libheader.c    SAGACard_Libheader.h
+SAGACard_LibInit.o:      SAGACard_LibInit.c      SAGACard_LibInit.h
+SAGACard_FindCard.o:     SAGACard_FindCard.c     SAGACard_FindCard.h
+SAGACard_InitCard.o:     SAGACard_InitCard.c     SAGACard_InitCard.h
+SAGACard_Settings.o:     SAGACard_Settings.c     SAGACard_Settings.h
+SAGACard_BitMap.o:       SAGACard_BitMap.c       SAGACard_BitMap.h
+SAGACard_CardMem.o:      SAGACard_CardMem.c      SAGACard_CardMem.h
+SAGACard_Drawing.o:      SAGACard_Drawing.c      SAGACard_Drawing.h
+SAGACard_Sprite.o:       SAGACard_Sprite.c       SAGACard_Sprite.h
+SAGACard_Support.o:      SAGACard_Support.c      SAGACard_Support.h
+SAGACard_Special.o:      SAGACard_Special.c      SAGACard_Special.h
+SAGACard_MemoryWindow.o: SAGACard_MemoryWindow.c SAGACard_MemoryWindow.h
+SAGACard_VideoWindow.o:  SAGACard_VideoWindow.c  SAGACard_VideoWindow.h
+SAGACard_VideoCapture.o: SAGACard_VideoCapture.c SAGACard_VideoCapture.h
+SAGACard_FlickerFixer.o: SAGACard_FlickerFixer.c SAGACard_FlickerFixer.h
+
+###########################################################
+# END OF FILE
+###########################################################
