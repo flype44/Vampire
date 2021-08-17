@@ -1,0 +1,15 @@
+
+; Add DOS "Script" property :
+; PROTECT make.run ADD S
+
+IF NOT EXISTS RAM:Assets
+    C:MakeDir RAM:Assets
+    C:Copy Data:Sources/IceDrakeScene/Assets/#?.dds  RAM:Assets
+    C:Copy Data:Sources/IceDrakeScene/Assets/#?.data RAM:Assets
+ENDIF
+
+CD Data:Sources/IceDrakeScene/
+
+C:vasmm68k_mot_os3 -m68080 -Fhunkexe IceDrakeScene.s -o RAM:IceDrakeScene
+
+RAM:IceDrakeScene
