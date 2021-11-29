@@ -1,0 +1,10 @@
+
+all: WBCandy
+
+WBCandy: WBCandy.c 
+	sc IDIR=include LINK WBCandy.c TO WBCandy
+
+clean:
+	delete quiet force WBCandy
+	delete quiet force WBCandy.o
+	delete quiet force WBCandy.lnk
