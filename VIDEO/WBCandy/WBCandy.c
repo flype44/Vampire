@@ -8,7 +8,7 @@
  **********************************************************
  * 
  * Example:
- * WBCandy d=anime2 c=12 ms=5 k=2116
+ * WBCandy d=anime2 c=12 ms=5 k=2116 quiet
  * 
  **********************************************************/
 
@@ -32,30 +32,7 @@
 #include	<proto/icon.h>
 #include	<proto/intuition.h>
 
-#include	"vampire/saga.h"
-#include	"vampire/vampire.h"
-#include	"proto/vampire.h"
-
-/**********************************************************
- *
- * Defines
- * 
- **********************************************************/
-
-#define APP_NAME     "WBCandy"
-#define APP_TITLE    "WBCandy 0.1alpha"
-#define APP_DESCR    "An AmigaOS3 Workbench-Candy for Vampire"
-#define APP_TEMPLATE "D=DIRECTORY/A,C=FRAMECOUNT/N/A,MS=MILLISECONDS/N,K=COLORKEY/N,QUIET/S"
-#define VERSTRING    "$VER: WBCandy (28.11.2021) Philippe CARPENTIER"
-
-enum {
-	OPT_DIRECTORY,  // 0
-	OPT_FRAMECOUNT, // 1
-	OPT_FRAMEDELAY, // 2
-	OPT_COLORKEY,   // 3
-	OPT_QUIET,      // 4
-	OPT_COUNT       // 5
-};
+#include	"WBCandy.h"
 
 /**********************************************************
  *
@@ -71,24 +48,21 @@ struct Library       * CxBase        = NULL;
 struct GfxBase       * GfxBase       = NULL;
 struct Library       * IconBase      = NULL;
 struct IntuitionBase * IntuitionBase = NULL;
-struct Screen        * screen        = NULL;
+struct MsgPort       * BrokerMsgPort = NULL;
 
-ULONG FBMem   = NULL;
-ULONG FBPtr   = NULL;
-BOOL  bRender = TRUE;
-
-ULONG quiet       = FALSE;
-ULONG colorKey    = 0x0000;
-ULONG frameCount  = 1;
-ULONG frameDelay  = 1;
-ULONG frameIndex  = 0;
-ULONG frameWidth  = 1280; 
-ULONG frameHeight = 720;
-ULONG frameBuffer = NULL;
-UBYTE directory[256];
+BOOL   bRender     = TRUE;
+ULONG  FBMem       = NULL;
+ULONG  FBPtr       = NULL;
+ULONG  quiet       = FALSE;
+ULONG  colorKey    = 0x0000;
+ULONG  frameCount  = 1;
+ULONG  frameDelay  = 1;
+ULONG  frameIndex  = 0;
+ULONG  frameWidth  = 0;
+ULONG  frameHeight = 0;
+UBYTE  directory[256];
 
 CxObj *broker;
-struct MsgPort *broker_mp;
 
 struct NewBroker newbroker = 
 {
@@ -117,25 +91,29 @@ void App_Init(void)
 		exit(RETURN_ERROR);
 	}
 	
-	if (!(IntuitionBase = (struct IntuitionBase*)OpenLibrary("intuition.library", 39L)))
+	if (!(IntuitionBase = (struct IntuitionBase*)OpenLibrary(
+		"intuition.library", 39L)))
 	{
 		printf("No intuition.library!");
 		exit(RETURN_ERROR);
 	}
 	
-	if (!(GfxBase = (struct GfxBase*)OpenLibrary("graphics.library", 0L)))
+	if (!(GfxBase = (struct GfxBase*)OpenLibrary(
+		"graphics.library", 0L)))
 	{
 		printf("No graphics.library!");
 		exit(RETURN_ERROR);
 	}
 	
-	if (!(IconBase = (struct Library*)OpenLibrary("icon.library", 0L)))
+	if (!(IconBase = (struct Library*)OpenLibrary(
+		"icon.library", 0L)))
 	{
 		printf("No icon.library!");
 		exit(RETURN_ERROR);
 	}
 	
-	if (!(CxBase = (struct Library*)OpenLibrary("commodities.library", 0L)))
+	if (!(CxBase = (struct Library*)OpenLibrary(
+		"commodities.library", 0L)))
 	{
 		printf("No commodities.library!");
 		exit(RETURN_ERROR);
@@ -188,13 +166,22 @@ void HidePiP(void)
 
 void ShowPiP(void)
 {
-	WRITE16(SAGA_PIP_COLORKEY, ((UWORD)colorKey) + 0x8000);
-	WRITE16(SAGA_PIP_PIXFMT,   SAGAF_RGB16);
-	WRITE32(SAGA_PIP_BPLPTR,   frameBuffer);
-	WRITE16(SAGA_PIP_X0,       SAGA_PIP_DELTAX);
-	WRITE16(SAGA_PIP_Y0,       SAGA_PIP_DELTAY);
-	WRITE16(SAGA_PIP_X1,       SAGA_PIP_DELTAX + frameWidth);
-	WRITE16(SAGA_PIP_Y1,       SAGA_PIP_DELTAY + frameHeight);
+	if (FBPtr != NULL)
+	{
+		ULONG bplptr = FBPtr + (
+			frameWidth  * // frame width in pixels
+			frameHeight * // frame height in pixels
+			frameIndex  * // frame index
+			2);           // bytes per pixels
+		
+		WRITE16(SAGA_PIP_COLORKEY, 0x8000 + (WORD)colorKey);
+		WRITE32(SAGA_PIP_BPLPTR,   bplptr);
+		WRITE16(SAGA_PIP_PIXFMT,   SAGAF_RGB16);
+		WRITE16(SAGA_PIP_X0,       SAGA_PIP_DELTAX);
+		WRITE16(SAGA_PIP_Y0,       SAGA_PIP_DELTAY);
+		WRITE16(SAGA_PIP_X1,       SAGA_PIP_DELTAX + frameWidth);
+		WRITE16(SAGA_PIP_Y1,       SAGA_PIP_DELTAY + frameHeight);
+	}
 }
 
 /**********************************************************
@@ -302,10 +289,9 @@ void UpdateFrames(void)
 	frameIndex++;
 	
 	if (frameIndex >= frameCount)
+	{
 		frameIndex = 0;
-	
-	frameBuffer = (FBPtr + 
-		(frameWidth * frameHeight * 2 * frameIndex));
+	}
 }
 
 /**********************************************************
@@ -317,13 +303,14 @@ void UpdateFrames(void)
 LONG ProcessMsg(void)
 {
 	CxMsg *msg;
-	ULONG msgid, msgtype;
+	
 	LONG sigs = SetSignal(0L, 0L);
 	
-	while(msg = (CxMsg *)GetMsg(broker_mp))
+	while(msg = (CxMsg *)GetMsg(BrokerMsgPort))
 	{
-		msgid = CxMsgID(msg);
-		msgtype = CxMsgType(msg);
+		ULONG msgid = CxMsgID(msg);
+		ULONG msgtype = CxMsgType(msg);
+		
 		ReplyMsg((struct Message *)msg);
 		
 		switch(msgtype)
@@ -450,6 +437,7 @@ void WBStart(void)
 ULONG main(ULONG argc, char *argv[])
 {
 	ULONG rc = RETURN_WARN;
+	struct Screen * screen;
 	
 	App_Init();
 	
@@ -460,6 +448,13 @@ ULONG main(ULONG argc, char *argv[])
 	else
 	{
 		CLIStart();
+	}
+	
+	if (screen = LockPubScreen(NULL))
+	{
+		frameWidth  = screen->Width;
+		frameHeight = screen->Height;
+		UnlockPubScreen(NULL, screen);
 	}
 	
 	if (!quiet)
@@ -473,9 +468,9 @@ ULONG main(ULONG argc, char *argv[])
 		printf("frameHeight = %lu\n",   frameHeight);
 	}
 	
-	if (broker_mp = CreateMsgPort())
+	if (BrokerMsgPort = CreateMsgPort())
 	{
-		newbroker.nb_Port = broker_mp;
+		newbroker.nb_Port = BrokerMsgPort;
 		
 		if (broker = CxBroker(&newbroker, NULL))
 		{
@@ -509,11 +504,13 @@ ULONG main(ULONG argc, char *argv[])
 			
 			DeleteCxObj(broker);
 			
-			while(msg = (CxMsg *)GetMsg(broker_mp))
+			while (msg = (CxMsg *)GetMsg(BrokerMsgPort))
+			{
 				ReplyMsg((struct Message *)msg);
+			}
 		}
 		
-		DeleteMsgPort(broker_mp);
+		DeleteMsgPort(BrokerMsgPort);
 	}
 	
 	App_Cleanup();
