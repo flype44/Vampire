@@ -1,0 +1,49 @@
++-------------------------+
+|                         |
+| ApolloControl ChangeLog |
+|                         |
++-------------------------+
+
+version 1.27 (2023-01-15)
+    - added DISPLAYMODE (force BEAMCON0 NTSC/PAL)
+    - removed AGA mode
+
+version 1.26 (2023-01-13)
+    - renamed project to ApolloControl
+    - modified ZOOM behaviour
+    - added ZOOMSHIFT, for all V4s
+
+version 1.25 (2023-01-12)
+    - new turtle modes, for all V4s
+
+version 1,24 (2022-12-29)
+    - enable JP parameter, for all V4s
+
+version 1.23 (2022-11-28)
+    - added Manticore ID.
+    - overall ID cleanup.
+    - added new V4 ZOOM switch.
+
+Version 1.22 (2021-11-14)
+    - Cleanups
+    - Compiled with SAS/C + VASM to 1.8L (2021-07-20).
+
+Version 1.21 (2021-11-13)
+    - Added V4 ZOOM switch.
+    - Added V4 AGAMODE switch.
+    - Added V4 SCANLINES switch.
+    - Compiled with SAS/C + VASM to 1.8L (2021-07-20).
+
+Version 1.20 (2021-10-15)
+    - Modified JOYPORT PAD2 mapping.  
+    - Compiled with SAS/C + VASM to 1.8L (2021-07-20).
+
+Version 1.19 (2021-08-12)
+    - Added V4 FireBird & IceDrake board ids.
+    - Added APOLLO-Shield option SH=SHIELD.
+    - Added APOLLO-Shield status in CP=CPU.
+    - Modified Pamela to Paula16 in BO=BOARD.
+    - Compiled with SAS/C + VASM to 1.8L (2021-07-20).
+
+Version 1.18 (2021-04-21)
+    - Added option JP=JOYPORT
