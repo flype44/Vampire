@@ -1,0 +1,37 @@
+@database ApolloWHDSetGuide
+@$VER: ApolloWHDSet.guide 0.2 (16.1.2023)
+@SMARTWRAP
+@node "MAIN" "ApolloWHDSet User's Guide, Introduction"
+
+@{JCENTER}
+
+@{b}ApolloWHDSet@{ub} User's Guide.
+
+@{fg shine}A GUI to set @{b}WHDLoad@{ub} game tooltypes for the @{b}Apollo/SAGA@{ub} cards.@{fg text}
+
+@{JLEFT}
+@{LINDENT 2}
+
+@{b}ApolloWHDSet feature list summary :@{ub}
+
+@{LINDENT 4}
+
+@{" OPTION1        " LINK OPTION1}
+
+@{" OPTION2        " LINK OPTION2}
+
+@{LINDENT 2}
+
+@endnode
+
+@node "OPTION1" "OPTION1"
+
+This option is for ...
+
+@endnode
+
+@node "OPTION2" "OPTION2"
+
+This option is for ...
+
+@endnode
